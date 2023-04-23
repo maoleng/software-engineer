@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
                     'original_price' => $original_price,
                 ];
             }
-            DB::table('order_products')->insert($data);
+            DB::table('OrderProduct')->insert($data);
             $order->update(['product_price' => $total]);
         }
     }
@@ -105,7 +105,7 @@ class DatabaseSeeder extends Seeder
                 'price' => $price,
             ];
         }
-        DB::table('import_products')->insert($data);
+        DB::table('ImportProduct')->insert($data);
         $import->update(['product_price' => $total]);
     }
 
@@ -122,7 +122,7 @@ class DatabaseSeeder extends Seeder
                 ];
             }
         }
-        DB::table('discounts')->insert($data);
+        DB::table('Discount')->insert($data);
     }
 
     private function createProducts($amount): void
@@ -138,7 +138,7 @@ class DatabaseSeeder extends Seeder
                 'created_at' => $this->faker()->dateTimeBetween('-1 year'),
             ];
         }
-        DB::table('products')->insert($data);
+        DB::table('Product')->insert($data);
     }
 
     private function createUsers($amount): void
@@ -155,7 +155,7 @@ class DatabaseSeeder extends Seeder
                 'created_at' => $this->faker()->date.' '.$this->faker()->time,
             ];
         }
-        DB::table('users')->insert($data);
+        DB::table('User')->insert($data);
     }
 
     private function createAdmins(): void

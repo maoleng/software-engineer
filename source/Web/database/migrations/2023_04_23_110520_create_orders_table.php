@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('Order', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('address')->nullable();
@@ -22,8 +22,8 @@ return new class extends Migration
             $table->double('ship_fee')->default(0);
             $table->double('product_price');
             $table->double('ship_price')->default(0);
-            $table->foreignId('user_id')->nullable()->constrained('users');
-            $table->foreignId('admin_id')->nullable()->constrained('admins');
+            $table->foreignId('user_id')->nullable()->constrained('User');
+            $table->foreignId('admin_id')->nullable()->constrained('Admin');
             $table->string('bank_code')->nullable();
             $table->string('transaction_code')->nullable();
             $table->dateTime('created_at');
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('Order');
     }
 };

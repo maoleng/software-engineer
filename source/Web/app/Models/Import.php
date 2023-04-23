@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Import extends Model
 {
 
+    protected $table = 'Import';
     public $timestamps = false;
 
     protected $fillable = [
@@ -16,7 +17,7 @@ class Import extends Model
 
     public function importProducts(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'import_products')->withPivot([
+        return $this->belongsToMany(Product::class, 'ImportProduct')->withPivot([
             'amount',
             'price',
         ]);

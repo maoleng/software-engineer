@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ImportProduct extends Model
 {
 
+    protected $table = 'ImportProduct';
     public $timestamps = false;
 
     protected $fillable = [
