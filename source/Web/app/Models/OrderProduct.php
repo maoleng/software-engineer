@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class OrderProduct extends Model
 {
 
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'phone', 'email', 'address', 'password', 'is_agent', 'created_at',
+        'order_id', 'product_id', 'name', 'amount', 'price', 'discount_price', 'original_price',
     ];
 }
