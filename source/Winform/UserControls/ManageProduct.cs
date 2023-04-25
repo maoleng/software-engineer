@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Specialized;
+    using System.Collections.Specialized;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Windows.Forms;
 
@@ -30,20 +31,20 @@ namespace Winform.UserControls
 
         void reloadProductList()
         {
+            var products = db.Products.ToList();
             Category[] categories = getCategories();
-            var products = db.Products
-                .Select(x => new
-                {
-                    x.id,
-                    Name = x.name,
-                    Category = x.category,
-                    Price = x.price,
-                    Description = x.description,
-                    Image = x.image,
-                    CreatedAt = x.created_at,
-                }).OrderByDescending(x => x.CreatedAt).ToList();
+            var productsWithCategories = products.Select(p => new
+            {
+                p.id,
+                p.name,
+                Category = categories.FirstOrDefault(c => c.CategoryId == p.category)?.CategoryName,
+                Price = p.price,
+                Description = p.description,
+                Image = p.image,
+                CreatedAt = p.created_at,
+            }).ToList();
 
-            tblProduct.DataSource = products;
+            tblProduct.DataSource = productsWithCategories;
         }
 
         private void tblProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -84,6 +85,13 @@ namespace Winform.UserControls
                 new Category{ CategoryId = 9, CategoryName = "ONEPLUS" },
                 new Category{ CategoryId = 10, CategoryName = "HUAWEI" },
             };
+        }
+
+        string GetCategoryName(int categoryId)
+        {
+            var categories = getCategories();
+            var category = categories.FirstOrDefault(c => c.CategoryId == categoryId);
+            return category != null ? category.CategoryName : "Unknown";
         }
 
         void displayProductData(int id, string image)
