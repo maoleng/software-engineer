@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageProduct));
             this.tblProduct = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tblDiscounts = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtImage = new System.Windows.Forms.TextBox();
+            this.btnEditDiscount = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnInit = new System.Windows.Forms.Button();
             this.imgImage = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.rTxtDescription = new System.Windows.Forms.RichTextBox();
@@ -85,14 +88,17 @@
             this.tblDiscounts.RowTemplate.Height = 24;
             this.tblDiscounts.Size = new System.Drawing.Size(270, 299);
             this.tblDiscounts.TabIndex = 3;
+            this.tblDiscounts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblDiscounts_CellContentClick);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.txtImage);
+            this.groupBox2.Controls.Add(this.btnEditDiscount);
+            this.groupBox2.Controls.Add(this.btnCancel);
+            this.groupBox2.Controls.Add(this.btnUpdate);
+            this.groupBox2.Controls.Add(this.btnCreate);
+            this.groupBox2.Controls.Add(this.btnInit);
             this.groupBox2.Controls.Add(this.imgImage);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.rTxtDescription);
@@ -110,64 +116,89 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Product Detail";
             // 
-            // button5
+            // label5
             // 
-            this.button5.Location = new System.Drawing.Point(723, 279);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(179, 47);
-            this.button5.TabIndex = 13;
-            this.button5.Text = "Edit Discount";
-            this.button5.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(347, 96);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 29);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Image";
             // 
-            // button4
+            // txtImage
             // 
-            this.button4.Location = new System.Drawing.Point(352, 279);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(110, 47);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Cancel";
-            this.button4.UseVisualStyleBackColor = true;
+            this.txtImage.Enabled = false;
+            this.txtImage.Location = new System.Drawing.Point(352, 128);
+            this.txtImage.Name = "txtImage";
+            this.txtImage.Size = new System.Drawing.Size(551, 34);
+            this.txtImage.TabIndex = 14;
             // 
-            // button3
+            // btnEditDiscount
             // 
-            this.button3.Location = new System.Drawing.Point(599, 279);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(118, 47);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Update";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnEditDiscount.Enabled = false;
+            this.btnEditDiscount.Location = new System.Drawing.Point(724, 301);
+            this.btnEditDiscount.Name = "btnEditDiscount";
+            this.btnEditDiscount.Size = new System.Drawing.Size(179, 47);
+            this.btnEditDiscount.TabIndex = 13;
+            this.btnEditDiscount.Text = "Edit Discount";
+            this.btnEditDiscount.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.Location = new System.Drawing.Point(468, 279);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 47);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Create";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCancel.Enabled = false;
+            this.btnCancel.Location = new System.Drawing.Point(352, 301);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(110, 47);
+            this.btnCancel.TabIndex = 12;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // button1
+            // btnUpdate
             // 
-            this.button1.Location = new System.Drawing.Point(217, 279);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 47);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Initialize";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnUpdate.Enabled = false;
+            this.btnUpdate.Location = new System.Drawing.Point(600, 301);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(118, 47);
+            this.btnUpdate.TabIndex = 11;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Enabled = false;
+            this.btnCreate.Location = new System.Drawing.Point(468, 301);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(125, 47);
+            this.btnCreate.TabIndex = 10;
+            this.btnCreate.Text = "Create";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // btnInit
+            // 
+            this.btnInit.Location = new System.Drawing.Point(217, 301);
+            this.btnInit.Name = "btnInit";
+            this.btnInit.Size = new System.Drawing.Size(129, 47);
+            this.btnInit.TabIndex = 9;
+            this.btnInit.Text = "Initialize";
+            this.btnInit.UseVisualStyleBackColor = true;
+            this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
             // 
             // imgImage
             // 
             this.imgImage.Location = new System.Drawing.Point(21, 33);
             this.imgImage.Name = "imgImage";
-            this.imgImage.Size = new System.Drawing.Size(234, 229);
+            this.imgImage.Size = new System.Drawing.Size(267, 253);
             this.imgImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgImage.TabIndex = 8;
             this.imgImage.TabStop = false;
+            this.imgImage.Click += new System.EventHandler(this.imgImage_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(275, 123);
+            this.label4.Location = new System.Drawing.Point(347, 181);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(135, 29);
             this.label4.TabIndex = 7;
@@ -175,16 +206,17 @@
             // 
             // rTxtDescription
             // 
-            this.rTxtDescription.Location = new System.Drawing.Point(280, 155);
+            this.rTxtDescription.Enabled = false;
+            this.rTxtDescription.Location = new System.Drawing.Point(352, 213);
             this.rTxtDescription.Name = "rTxtDescription";
-            this.rTxtDescription.Size = new System.Drawing.Size(622, 107);
+            this.rTxtDescription.Size = new System.Drawing.Size(550, 73);
             this.rTxtDescription.TabIndex = 6;
             this.rTxtDescription.Text = "";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(692, 34);
+            this.label3.Location = new System.Drawing.Point(719, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 29);
             this.label3.TabIndex = 5;
@@ -192,16 +224,17 @@
             // 
             // slCategory
             // 
+            this.slCategory.Enabled = false;
             this.slCategory.FormattingEnabled = true;
-            this.slCategory.Location = new System.Drawing.Point(697, 66);
+            this.slCategory.Location = new System.Drawing.Point(724, 45);
             this.slCategory.Name = "slCategory";
-            this.slCategory.Size = new System.Drawing.Size(205, 37);
+            this.slCategory.Size = new System.Drawing.Size(179, 37);
             this.slCategory.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(506, 34);
+            this.label2.Location = new System.Drawing.Point(556, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 29);
             this.label2.TabIndex = 3;
@@ -209,7 +242,8 @@
             // 
             // txtPrice
             // 
-            this.txtPrice.Location = new System.Drawing.Point(511, 66);
+            this.txtPrice.Enabled = false;
+            this.txtPrice.Location = new System.Drawing.Point(561, 45);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(156, 34);
             this.txtPrice.TabIndex = 2;
@@ -217,7 +251,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(275, 34);
+            this.label1.Location = new System.Drawing.Point(347, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 29);
             this.label1.TabIndex = 1;
@@ -225,9 +259,10 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(280, 66);
+            this.txtName.Enabled = false;
+            this.txtName.Location = new System.Drawing.Point(352, 48);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(200, 34);
+            this.txtName.Size = new System.Drawing.Size(182, 34);
             this.txtName.TabIndex = 0;
             // 
             // ManageProduct
@@ -258,11 +293,11 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEditDiscount;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.Button btnInit;
         private System.Windows.Forms.PictureBox imgImage;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox rTxtDescription;
@@ -270,5 +305,7 @@
         private System.Windows.Forms.ComboBox slCategory;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPrice;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtImage;
     }
 }
