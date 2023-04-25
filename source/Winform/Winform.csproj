@@ -92,6 +92,12 @@
     <Compile Include="ImportProduct.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="migration.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -110,6 +116,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="NavigationControl.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -127,8 +134,47 @@
     <Compile Include="User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ManageEmployee.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ManageEmployee.Designer.cs">
+      <DependentUpon>ManageEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ManageImport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ManageImport.Designer.cs">
+      <DependentUpon>ManageImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ManageOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ManageOrder.Designer.cs">
+      <DependentUpon>ManageOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ManageCustomer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ManageCustomer.Designer.cs">
+      <DependentUpon>ManageCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ManageProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ManageProduct.Designer.cs">
+      <DependentUpon>ManageProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Statistic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Statistic.Designer.cs">
+      <DependentUpon>Statistic.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -139,6 +185,24 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\ManageEmployee.resx">
+      <DependentUpon>ManageEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ManageImport.resx">
+      <DependentUpon>ManageImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ManageOrder.resx">
+      <DependentUpon>ManageOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ManageCustomer.resx">
+      <DependentUpon>ManageCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ManageProduct.resx">
+      <DependentUpon>ManageProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Statistic.resx">
+      <DependentUpon>Statistic.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>

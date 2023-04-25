@@ -48,7 +48,8 @@ namespace Winform
                 return;
             }
             MessageBox.Show("Login successfully");
-
+            this.Hide();
+            (new MainForm()).Show();
         }
     }
 }
