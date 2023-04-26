@@ -51,6 +51,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtTransactionCode = new System.Windows.Forms.TextBox();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCreatedAt = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tblOrderDetail)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +85,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.txtCreatedAt);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.txtBankCode);
             this.groupBox3.Controls.Add(this.label9);
@@ -273,6 +277,23 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(10, 299);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(131, 29);
+            this.label10.TabIndex = 44;
+            this.label10.Text = "Ordered At";
+            // 
+            // txtCreatedAt
+            // 
+            this.txtCreatedAt.Location = new System.Drawing.Point(15, 331);
+            this.txtCreatedAt.Name = "txtCreatedAt";
+            this.txtCreatedAt.ReadOnly = true;
+            this.txtCreatedAt.Size = new System.Drawing.Size(216, 34);
+            this.txtCreatedAt.TabIndex = 43;
+            // 
             // DetailOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -314,5 +335,7 @@
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtCreatedAt;
     }
 }
