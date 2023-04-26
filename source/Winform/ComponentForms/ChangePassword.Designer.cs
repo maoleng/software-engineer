@@ -1,6 +1,6 @@
 ﻿namespace Winform.ComponentForms
 {
-    partial class ChangeCustomerPassword
+    partial class ChangePassword
     {
         /// <summary>
         /// Required designer variable.

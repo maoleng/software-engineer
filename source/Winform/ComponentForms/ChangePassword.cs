@@ -11,16 +11,18 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Winform.ComponentForms
 {
-    public partial class ChangeCustomerPassword : Form
+    public partial class ChangePassword : Form
     {
 
-        int userId;
+        int id;
+        string type;
         SoftwareEngineerEntities db = new SoftwareEngineerEntities();
 
-        public ChangeCustomerPassword(int userId)
+        public ChangePassword(int id, string type)
         {
             InitializeComponent();
-            this.userId = userId;
+            this.id = id;
+            this.type = type;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -33,12 +35,19 @@ namespace Winform.ComponentForms
 
                 return;
             }
-
-            User user = db.Users.Where(u => u.id == userId).First();
-            user.password = BCrypt.Net.BCrypt.HashPassword(password);
-            db.SaveChanges();
-
-            MessageBox.Show($"Change {user.name}'s password successfully");
+            if (type == "admin")
+            {
+                Admin admin = db.Admins.Where(u => u.id == id).First();
+                admin.password = BCrypt.Net.BCrypt.HashPassword(password);
+                db.SaveChanges();
+                MessageBox.Show($"Change {admin.name}'s password successfully");
+            } else
+            {
+                User user = db.Users.Where(u => u.id == id).First();
+                user.password = BCrypt.Net.BCrypt.HashPassword(password);
+                db.SaveChanges();
+                MessageBox.Show($"Change {user.name}'s password successfully");
+            }
 
             this.Close();
         }

@@ -149,7 +149,7 @@ namespace Winform.UserControls
                 return;
             }
 
-            ChangeCustomerPassword form = new ChangeCustomerPassword(userId);
+            ChangePassword form = new ChangePassword(userId, "customer");
             form.ShowDialog();
         }
 
