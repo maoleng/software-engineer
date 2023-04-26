@@ -28,6 +28,7 @@ namespace Winform
         public string password { get; set; }
         public bool is_agent { get; set; }
         public System.DateTime created_at { get; set; }
+        public bool active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

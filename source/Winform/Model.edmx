@@ -4,16 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SoftwareEngineerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SoftwareEngineerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="role" Type="int" Nullable="false" />
+          <Property Name="is_admin_master" Type="bit" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="created_at" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Discount">
@@ -146,6 +147,7 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <Property Name="address" Type="nvarchar" MaxLength="255" />
           <Property Name="password" Type="nvarchar" MaxLength="255" />
           <Property Name="is_agent" Type="bit" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="created_at" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="discount_product_id_foreign">
@@ -290,8 +292,7 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SoftwareEngineerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -301,11 +302,12 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role" Type="Int32" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="Self.order_admin_id_foreign" FromRole="Admin" ToRole="Order" />
+          <Property Name="is_admin_master" Type="Boolean" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Discount">
           <Key>
@@ -413,6 +415,7 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <Property Name="is_agent" Type="Boolean" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="Self.order_user_id_foreign" FromRole="User" ToRole="Order" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ImportProduct">
           <Key>
@@ -582,9 +585,10 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="SoftwareEngineerModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="is_admin_master" ColumnName="is_admin_master" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
@@ -686,6 +690,7 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SoftwareEngineerModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
