@@ -200,7 +200,7 @@ namespace Winform.UserControls
             db.Products.Add(new Product()
             {
                 category = Convert.ToInt32(slCategory.SelectedValue),
-                name = txtImage.Text,
+                name = txtName.Text,
                 price = Convert.ToInt32(txtPrice.Text),
                 description = rTxtDescription.Text,
                 image = txtImage.Text,
