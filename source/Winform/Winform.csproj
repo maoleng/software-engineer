@@ -77,6 +77,12 @@
     <Compile Include="Admin.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ComponentForms\EditDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentForms\EditDiscount.Designer.cs">
+      <DependentUpon>EditDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Discount.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -173,6 +179,9 @@
     <Compile Include="UserControls\Statistic.Designer.cs">
       <DependentUpon>Statistic.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ComponentForms\EditDiscount.resx">
+      <DependentUpon>EditDiscount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

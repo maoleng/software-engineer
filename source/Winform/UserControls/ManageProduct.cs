@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System;
-    using System.Collections.Specialized;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Windows.Forms;
+using Winform.ComponentForms;
 
 namespace Winform.UserControls
 {
@@ -65,7 +64,8 @@ namespace Winform.UserControls
 
         private void tblDiscounts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            EditDiscount form = new EditDiscount(productId);
+            form.ShowDialog();
         }
 
         void displayCategoryComboBox()
@@ -258,6 +258,7 @@ namespace Winform.UserControls
             {
                 db.Products.Remove(product);
                 db.SaveChanges();
+                productId = 0;
             } catch (DbUpdateException)
             {
                 db.Products.Add(product);
