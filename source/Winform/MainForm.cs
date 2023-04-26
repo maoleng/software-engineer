@@ -28,6 +28,7 @@ namespace Winform
                 new ManageCustomer(), 
                 new ManageProduct(),
                 new ManageImport(),
+                new ManageEmployee(),
                 new Statistic(),
             };
 
@@ -55,14 +56,21 @@ namespace Winform
             navigationControl.display(3);
         }
 
-        private void btnStatistic_Click(object sender, EventArgs e)
+        private void btnEmployee_Click(object sender, EventArgs e)
         {
             navigationControl.display(4);
+        }
+
+        private void btnStatistic_Click(object sender, EventArgs e)
+        {
+            navigationControl.display(5);
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
             
         }
+
+      
     }
 }
