@@ -4,10 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Winform.UserControls
@@ -27,12 +30,12 @@ namespace Winform.UserControls
         private void ManageOrder_Load(object sender, EventArgs e)
         {
             reloadList();
+            displaySelectStatus();
         }
 
         void reloadList()
         {
             listFormat(db.Orders.ToList());
-            displaySelectStatus();
         }
 
         void displaySelectStatus()
@@ -128,21 +131,14 @@ namespace Winform.UserControls
             return orders.Where(o => o.is_paid == cbIsPaid.Checked).ToList();
         }
 
-        List<Order> getResultSearchFilter()
+        void reloadListWithSearchAndFilter()
         {
             List<Order> orders = searchList();
-
-            string a = cbFilterTimeRange.Checked ? " time " : " ";
-            string b = cbFilterStatus.Checked ? " status " : " ";
-            string c = cbFilterPaymentStatus.Checked ? " payment " : " ";
-           
-
-            MessageBox.Show($"Filter by {a} {b} {c}");
             orders = cbFilterTimeRange.Checked ? filterOrderTimeRange(orders) : orders;
             orders = cbFilterStatus.Checked ? filterStatusList(orders) : orders;
             orders = cbFilterPaymentStatus.Checked ? filterPaymentStatus(orders) : orders;
 
-            return orders;
+            listFormat(orders);
         }
 
         private void txtQuery_KeyDown(object sender, KeyEventArgs e)
@@ -151,26 +147,53 @@ namespace Winform.UserControls
             {
                 return;
             }
-            List<Order> orders = getResultSearchFilter();
-            listFormat(orders);
+            reloadListWithSearchAndFilter();
         }
 
         private void slFilterStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Order> orders = getResultSearchFilter();
-            listFormat(orders);
+            reloadListWithSearchAndFilter();
         }
 
         private void txtFilterStartTime_ValueChanged(object sender, EventArgs e)
         {
-            List<Order> orders = getResultSearchFilter();
-            listFormat(orders);
+            reloadListWithSearchAndFilter();
         }
 
         private void cbIsPaid_CheckedChanged(object sender, EventArgs e)
         {
-            List<Order> orders = getResultSearchFilter();
-            listFormat(orders);
+            reloadListWithSearchAndFilter();
+        }
+
+        private void tblOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = tblOrder.Rows[e.RowIndex];
+            int id = Convert.ToInt32(row.Cells["id"].Value);
+            var status = row.Cells["Status"].Value.ToString();
+            orderId = id;
+
+            displayDetailData(status);
+            groupActionOrder.Enabled = true;
+        }
+
+        void displayDetailData(string status)
+        {
+            var order = db.Orders.Find(orderId);
+            slStatus.SelectedIndex = slStatus.FindStringExact(status);
+            cbPaidStatus.Checked = order.is_paid;
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            Order order = db.Orders.Find(orderId);
+            order.status = Convert.ToInt32(slStatus.SelectedValue.ToString());
+            order.is_paid = cbPaidStatus.Checked;
+
+            db.SaveChanges();
+            orderId = 0;
+            reloadListWithSearchAndFilter();
+
+            MessageBox.Show("Updated order successfully");
         }
     }
 

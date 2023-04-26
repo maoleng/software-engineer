@@ -41,17 +41,17 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtQuery = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupActionOrder = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.cbPaidStatus = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.slStatus = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblOrder)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.groupActionOrder.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -167,6 +167,7 @@
             this.tblOrder.RowTemplate.Height = 24;
             this.tblOrder.Size = new System.Drawing.Size(874, 299);
             this.tblOrder.TabIndex = 2;
+            this.tblOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblOrder_CellContentClick);
             // 
             // groupBox3
             // 
@@ -195,22 +196,24 @@
             this.btnUpdate.TabIndex = 20;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // groupBox4
+            // groupActionOrder
             // 
-            this.groupBox4.Controls.Add(this.button2);
-            this.groupBox4.Controls.Add(this.button1);
-            this.groupBox4.Controls.Add(this.checkBox5);
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.slStatus);
-            this.groupBox4.Controls.Add(this.btnUpdate);
-            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(288, 149);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(646, 190);
-            this.groupBox4.TabIndex = 21;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Action";
+            this.groupActionOrder.Controls.Add(this.button2);
+            this.groupActionOrder.Controls.Add(this.button1);
+            this.groupActionOrder.Controls.Add(this.cbPaidStatus);
+            this.groupActionOrder.Controls.Add(this.label1);
+            this.groupActionOrder.Controls.Add(this.slStatus);
+            this.groupActionOrder.Controls.Add(this.btnUpdate);
+            this.groupActionOrder.Enabled = false;
+            this.groupActionOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupActionOrder.Location = new System.Drawing.Point(288, 149);
+            this.groupActionOrder.Name = "groupActionOrder";
+            this.groupActionOrder.Size = new System.Drawing.Size(646, 190);
+            this.groupActionOrder.TabIndex = 21;
+            this.groupActionOrder.TabStop = false;
+            this.groupActionOrder.Text = "Action";
             // 
             // button2
             // 
@@ -230,15 +233,15 @@
             this.button1.Text = "View";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // cbPaidStatus
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(241, 61);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(196, 33);
-            this.checkBox5.TabIndex = 26;
-            this.checkBox5.Text = "Payment status";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.cbPaidStatus.AutoSize = true;
+            this.cbPaidStatus.Location = new System.Drawing.Point(241, 61);
+            this.cbPaidStatus.Name = "cbPaidStatus";
+            this.cbPaidStatus.Size = new System.Drawing.Size(196, 33);
+            this.cbPaidStatus.TabIndex = 26;
+            this.cbPaidStatus.Text = "Payment status";
+            this.cbPaidStatus.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -261,7 +264,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupActionOrder);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -274,8 +277,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tblOrder)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupActionOrder.ResumeLayout(false);
+            this.groupActionOrder.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -294,9 +297,9 @@
         private System.Windows.Forms.DateTimePicker txtFilterEndTime;
         private System.Windows.Forms.DateTimePicker txtFilterStartTime;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupActionOrder;
         private System.Windows.Forms.ComboBox slStatus;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox cbPaidStatus;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
