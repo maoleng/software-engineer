@@ -29,40 +29,40 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbFilterStatus = new System.Windows.Forms.CheckBox();
+            this.cbFilterPaymentStatus = new System.Windows.Forms.CheckBox();
+            this.cbFilterTimeRange = new System.Windows.Forms.CheckBox();
+            this.cbIsPaid = new System.Windows.Forms.CheckBox();
+            this.txtFilterEndTime = new System.Windows.Forms.DateTimePicker();
+            this.txtFilterStartTime = new System.Windows.Forms.DateTimePicker();
+            this.slFilterStatus = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tblProduct = new System.Windows.Forms.DataGridView();
+            this.tblOrder = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.txtQuery = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.slStatus = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tblProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblOrder)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.checkBox4);
-            this.groupBox2.Controls.Add(this.checkBox3);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.dateTimePicker2);
-            this.groupBox2.Controls.Add(this.dateTimePicker1);
-            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.cbFilterStatus);
+            this.groupBox2.Controls.Add(this.cbFilterPaymentStatus);
+            this.groupBox2.Controls.Add(this.cbFilterTimeRange);
+            this.groupBox2.Controls.Add(this.cbIsPaid);
+            this.groupBox2.Controls.Add(this.txtFilterEndTime);
+            this.groupBox2.Controls.Add(this.txtFilterStartTime);
+            this.groupBox2.Controls.Add(this.slFilterStatus);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(16, 23);
             this.groupBox2.Name = "groupBox2";
@@ -71,9 +71,85 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filter";
             // 
+            // cbFilterStatus
+            // 
+            this.cbFilterStatus.AutoSize = true;
+            this.cbFilterStatus.Location = new System.Drawing.Point(21, 26);
+            this.cbFilterStatus.Name = "cbFilterStatus";
+            this.cbFilterStatus.Size = new System.Drawing.Size(166, 33);
+            this.cbFilterStatus.TabIndex = 23;
+            this.cbFilterStatus.Text = "Order status";
+            this.cbFilterStatus.UseVisualStyleBackColor = true;
+            this.cbFilterStatus.CheckedChanged += new System.EventHandler(this.cbFilterStatus_CheckedChanged);
+            // 
+            // cbFilterPaymentStatus
+            // 
+            this.cbFilterPaymentStatus.AutoSize = true;
+            this.cbFilterPaymentStatus.Location = new System.Drawing.Point(592, 26);
+            this.cbFilterPaymentStatus.Name = "cbFilterPaymentStatus";
+            this.cbFilterPaymentStatus.Size = new System.Drawing.Size(196, 33);
+            this.cbFilterPaymentStatus.TabIndex = 22;
+            this.cbFilterPaymentStatus.Text = "Payment status";
+            this.cbFilterPaymentStatus.UseVisualStyleBackColor = true;
+            this.cbFilterPaymentStatus.CheckedChanged += new System.EventHandler(this.cbFilterPaymentStatus_CheckedChanged);
+            // 
+            // cbFilterTimeRange
+            // 
+            this.cbFilterTimeRange.AutoSize = true;
+            this.cbFilterTimeRange.Location = new System.Drawing.Point(219, 26);
+            this.cbFilterTimeRange.Name = "cbFilterTimeRange";
+            this.cbFilterTimeRange.Size = new System.Drawing.Size(218, 33);
+            this.cbFilterTimeRange.TabIndex = 22;
+            this.cbFilterTimeRange.Text = "Order time range";
+            this.cbFilterTimeRange.UseVisualStyleBackColor = true;
+            this.cbFilterTimeRange.CheckedChanged += new System.EventHandler(this.cbFilterTimeRange_CheckedChanged);
+            // 
+            // cbIsPaid
+            // 
+            this.cbIsPaid.AutoSize = true;
+            this.cbIsPaid.Enabled = false;
+            this.cbIsPaid.Location = new System.Drawing.Point(592, 62);
+            this.cbIsPaid.Name = "cbIsPaid";
+            this.cbIsPaid.Size = new System.Drawing.Size(106, 33);
+            this.cbIsPaid.TabIndex = 21;
+            this.cbIsPaid.Text = "Is paid";
+            this.cbIsPaid.UseVisualStyleBackColor = true;
+            this.cbIsPaid.CheckedChanged += new System.EventHandler(this.cbIsPaid_CheckedChanged);
+            // 
+            // txtFilterEndTime
+            // 
+            this.txtFilterEndTime.CustomFormat = "yyyy/MM/dd";
+            this.txtFilterEndTime.Enabled = false;
+            this.txtFilterEndTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtFilterEndTime.Location = new System.Drawing.Point(401, 62);
+            this.txtFilterEndTime.Name = "txtFilterEndTime";
+            this.txtFilterEndTime.Size = new System.Drawing.Size(167, 34);
+            this.txtFilterEndTime.TabIndex = 19;
+            // 
+            // txtFilterStartTime
+            // 
+            this.txtFilterStartTime.CustomFormat = "yyyy/MM/dd";
+            this.txtFilterStartTime.Enabled = false;
+            this.txtFilterStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtFilterStartTime.Location = new System.Drawing.Point(219, 62);
+            this.txtFilterStartTime.Name = "txtFilterStartTime";
+            this.txtFilterStartTime.Size = new System.Drawing.Size(167, 34);
+            this.txtFilterStartTime.TabIndex = 18;
+            this.txtFilterStartTime.ValueChanged += new System.EventHandler(this.txtFilterStartTime_ValueChanged);
+            // 
+            // slFilterStatus
+            // 
+            this.slFilterStatus.Enabled = false;
+            this.slFilterStatus.FormattingEnabled = true;
+            this.slFilterStatus.Location = new System.Drawing.Point(21, 62);
+            this.slFilterStatus.Name = "slFilterStatus";
+            this.slFilterStatus.Size = new System.Drawing.Size(177, 37);
+            this.slFilterStatus.TabIndex = 17;
+            this.slFilterStatus.SelectedIndexChanged += new System.EventHandler(this.slFilterStatus_SelectedIndexChanged);
+            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tblProduct);
+            this.groupBox1.Controls.Add(this.tblOrder);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(16, 376);
             this.groupBox1.Name = "groupBox1";
@@ -82,19 +158,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Order List";
             // 
-            // tblProduct
+            // tblOrder
             // 
-            this.tblProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tblProduct.Location = new System.Drawing.Point(21, 40);
-            this.tblProduct.Name = "tblProduct";
-            this.tblProduct.RowHeadersWidth = 51;
-            this.tblProduct.RowTemplate.Height = 24;
-            this.tblProduct.Size = new System.Drawing.Size(874, 299);
-            this.tblProduct.TabIndex = 2;
+            this.tblOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tblOrder.Location = new System.Drawing.Point(21, 40);
+            this.tblOrder.Name = "tblOrder";
+            this.tblOrder.RowHeadersWidth = 51;
+            this.tblOrder.RowTemplate.Height = 24;
+            this.tblOrder.Size = new System.Drawing.Size(874, 299);
+            this.tblOrder.TabIndex = 2;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.txtQuery);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(16, 149);
             this.groupBox3.Name = "groupBox3";
@@ -103,80 +179,13 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Search";
             // 
-            // textBox1
+            // txtQuery
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(22, 33);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(216, 34);
-            this.textBox1.TabIndex = 0;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(21, 62);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(177, 37);
-            this.comboBox1.TabIndex = 17;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "yyyy/MM/dd";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(219, 62);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(167, 34);
-            this.dateTimePicker1.TabIndex = 18;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CustomFormat = "yyyy/MM/dd";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(401, 62);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(167, 34);
-            this.dateTimePicker2.TabIndex = 19;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(592, 62);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(106, 33);
-            this.checkBox1.TabIndex = 21;
-            this.checkBox1.Text = "Is paid";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(219, 26);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(218, 33);
-            this.checkBox2.TabIndex = 22;
-            this.checkBox2.Text = "Order time range";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(592, 26);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(196, 33);
-            this.checkBox3.TabIndex = 22;
-            this.checkBox3.Text = "Payment status";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(21, 26);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(166, 33);
-            this.checkBox4.TabIndex = 23;
-            this.checkBox4.Text = "Order status";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.txtQuery.Location = new System.Drawing.Point(22, 33);
+            this.txtQuery.Name = "txtQuery";
+            this.txtQuery.Size = new System.Drawing.Size(216, 34);
+            this.txtQuery.TabIndex = 0;
+            this.txtQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuery_KeyDown);
             // 
             // btnUpdate
             // 
@@ -193,7 +202,7 @@
             this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Controls.Add(this.checkBox5);
             this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.comboBox2);
+            this.groupBox4.Controls.Add(this.slStatus);
             this.groupBox4.Controls.Add(this.btnUpdate);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(288, 149);
@@ -203,22 +212,23 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Action";
             // 
-            // comboBox2
+            // button2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(24, 61);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(177, 37);
-            this.comboBox2.TabIndex = 24;
+            this.button2.Location = new System.Drawing.Point(180, 123);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(129, 47);
+            this.button2.TabIndex = 28;
+            this.button2.Text = "Print";
+            this.button2.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // button1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 29);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Status";
+            this.button1.Location = new System.Drawing.Point(24, 123);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 47);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "View";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // checkBox5
             // 
@@ -230,23 +240,22 @@
             this.checkBox5.Text = "Payment status";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // label1
             // 
-            this.button1.Location = new System.Drawing.Point(24, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 47);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "View";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 29);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Status";
             // 
-            // button2
+            // slStatus
             // 
-            this.button2.Location = new System.Drawing.Point(180, 123);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 47);
-            this.button2.TabIndex = 28;
-            this.button2.Text = "Print";
-            this.button2.UseVisualStyleBackColor = true;
+            this.slStatus.FormattingEnabled = true;
+            this.slStatus.Location = new System.Drawing.Point(24, 61);
+            this.slStatus.Name = "slStatus";
+            this.slStatus.Size = new System.Drawing.Size(177, 37);
+            this.slStatus.TabIndex = 24;
             // 
             // ManageOrder
             // 
@@ -258,10 +267,11 @@
             this.Controls.Add(this.groupBox2);
             this.Name = "ManageOrder";
             this.Size = new System.Drawing.Size(950, 750);
+            this.Load += new System.EventHandler(this.ManageOrder_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tblProduct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblOrder)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -273,19 +283,19 @@
         #endregion
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView tblProduct;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridView tblOrder;
+        private System.Windows.Forms.ComboBox slFilterStatus;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox txtQuery;
+        private System.Windows.Forms.CheckBox cbFilterStatus;
+        private System.Windows.Forms.CheckBox cbFilterPaymentStatus;
+        private System.Windows.Forms.CheckBox cbFilterTimeRange;
+        private System.Windows.Forms.CheckBox cbIsPaid;
+        private System.Windows.Forms.DateTimePicker txtFilterEndTime;
+        private System.Windows.Forms.DateTimePicker txtFilterStartTime;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox slStatus;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
