@@ -161,10 +161,10 @@
     <Compile Include="UserControls\ManageCustomer.Designer.cs">
       <DependentUpon>ManageCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Product\ManageProduct.cs">
+    <Compile Include="UserControls\ManageProduct.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Product\ManageProduct.Designer.cs">
+    <Compile Include="UserControls\ManageProduct.Designer.cs">
       <DependentUpon>ManageProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Statistic.cs">
@@ -200,7 +200,7 @@
     <EmbeddedResource Include="UserControls\ManageCustomer.resx">
       <DependentUpon>ManageCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Product\ManageProduct.resx">
+    <EmbeddedResource Include="UserControls\ManageProduct.resx">
       <DependentUpon>ManageProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Statistic.resx">
