@@ -17,6 +17,7 @@ namespace Winform.UserControls
     {
 
         SoftwareEngineerEntities db = new SoftwareEngineerEntities();
+        int productId = 0;
 
         public ManageProduct()
         {
@@ -42,7 +43,7 @@ namespace Winform.UserControls
                 Description = p.description,
                 Image = p.image,
                 CreatedAt = p.created_at,
-            }).ToList();
+            }).OrderByDescending(c => c.CreatedAt).ToList();
 
             tblProduct.DataSource = productsWithCategories;
         }
@@ -51,12 +52,13 @@ namespace Winform.UserControls
         {
             DataGridViewRow row = tblProduct.Rows[e.RowIndex];
             int id = Convert.ToInt32(row.Cells["id"].Value);
-            int category = Convert.ToInt32(row.Cells["Category"].Value);
+            this.productId = id;
+            string category = row.Cells["Category"].Value.ToString();
             string image = row.Cells["Image"].Value.ToString();
 
             displayProductDiscount(id);
             displayProductData(id, image);
-            slCategory.SelectedValue = category;
+            slCategory.SelectedIndex = slCategory.FindStringExact(category);
         }
 
         private void tblDiscounts_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -209,6 +211,28 @@ namespace Winform.UserControls
             rTxtDescription.Text = "";
 
             MessageBox.Show("Created product successfully");
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (productId == 0)
+            {
+                MessageBox.Show("Please choose a product");
+
+                return;
+            }
+
+            Product product = db.Products.Find(productId);
+            product.name = txtName.Text;
+            product.price = Convert.ToInt32(txtPrice.Text);
+            product.image = txtImage.Text;
+            product.description = rTxtDescription.Text;
+            product.category = Convert.ToInt32(slCategory.SelectedValue);
+
+            db.SaveChanges();
+            reloadProductList();
+
+            MessageBox.Show("Updated product successfully");
         }
     }
 
