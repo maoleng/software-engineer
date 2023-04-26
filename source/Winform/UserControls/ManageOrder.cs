@@ -123,8 +123,7 @@ namespace Winform.UserControls
             ).ToList();
         }
 
-        List<Order> filter
-            PaymentStatus(List<Order> orders)
+        List<Order> filterPaymentStatus(List<Order> orders)
         {
             return orders.Where(o => o.is_paid == cbIsPaid.Checked).ToList();
         }
