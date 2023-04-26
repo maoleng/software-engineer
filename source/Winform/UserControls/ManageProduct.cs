@@ -2,6 +2,8 @@
 using System;
     using System.Collections.Specialized;
 using System.Data;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -63,7 +65,7 @@ namespace Winform.UserControls
 
         private void tblDiscounts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnEditDiscount.Enabled = true;
+            
         }
 
         void displayCategoryComboBox()
@@ -126,6 +128,7 @@ namespace Winform.UserControls
             btnCancel.Enabled = true;
             btnCreate.Enabled = true;
             btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
             
             txtName.Enabled = true;
             txtPrice.Enabled = true;
@@ -141,6 +144,7 @@ namespace Winform.UserControls
             btnCancel.Enabled = false;
             btnCreate.Enabled = false;
             btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
 
             txtName.Enabled = false;
             txtPrice.Enabled = false;
@@ -204,13 +208,18 @@ namespace Winform.UserControls
             });
             db.SaveChanges();
             reloadProductList();
+            clearInput();
 
+            MessageBox.Show("Created product successfully");
+        }
+
+        void clearInput()
+        {
             txtName.Text = "";
             txtPrice.Text = "";
             txtImage.Text = "";
             rTxtDescription.Text = "";
-
-            MessageBox.Show("Created product successfully");
+            imgImage.Image = null;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -233,6 +242,32 @@ namespace Winform.UserControls
             reloadProductList();
 
             MessageBox.Show("Updated product successfully");
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (productId == 0)
+            {
+                MessageBox.Show("Please choose a product");
+
+                return;
+            }
+            Product product = db.Products.Find(productId);
+
+            try
+            {
+                db.Products.Remove(product);
+                db.SaveChanges();
+            } catch (DbUpdateException)
+            {
+                db.Products.Add(product);
+                MessageBox.Show("Can not delete because it has relation to others");
+                return;
+            }
+            clearInput();
+            reloadProductList();
+
+            MessageBox.Show("Deleted product successfully");
         }
     }
 

@@ -34,7 +34,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtImage = new System.Windows.Forms.TextBox();
-            this.btnEditDiscount = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
@@ -48,6 +47,7 @@
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tblProduct)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblDiscounts)).BeginInit();
@@ -91,9 +91,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnDelete);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtImage);
-            this.groupBox2.Controls.Add(this.btnEditDiscount);
             this.groupBox2.Controls.Add(this.btnCancel);
             this.groupBox2.Controls.Add(this.btnUpdate);
             this.groupBox2.Controls.Add(this.btnCreate);
@@ -132,20 +132,10 @@
             this.txtImage.Size = new System.Drawing.Size(551, 34);
             this.txtImage.TabIndex = 14;
             // 
-            // btnEditDiscount
-            // 
-            this.btnEditDiscount.Enabled = false;
-            this.btnEditDiscount.Location = new System.Drawing.Point(724, 301);
-            this.btnEditDiscount.Name = "btnEditDiscount";
-            this.btnEditDiscount.Size = new System.Drawing.Size(179, 47);
-            this.btnEditDiscount.TabIndex = 13;
-            this.btnEditDiscount.Text = "Edit Discount";
-            this.btnEditDiscount.UseVisualStyleBackColor = true;
-            // 
             // btnCancel
             // 
             this.btnCancel.Enabled = false;
-            this.btnCancel.Location = new System.Drawing.Point(352, 301);
+            this.btnCancel.Location = new System.Drawing.Point(414, 301);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 47);
             this.btnCancel.TabIndex = 12;
@@ -156,7 +146,7 @@
             // btnUpdate
             // 
             this.btnUpdate.Enabled = false;
-            this.btnUpdate.Location = new System.Drawing.Point(600, 301);
+            this.btnUpdate.Location = new System.Drawing.Point(661, 301);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(118, 47);
             this.btnUpdate.TabIndex = 11;
@@ -167,7 +157,7 @@
             // btnCreate
             // 
             this.btnCreate.Enabled = false;
-            this.btnCreate.Location = new System.Drawing.Point(468, 301);
+            this.btnCreate.Location = new System.Drawing.Point(530, 301);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(125, 47);
             this.btnCreate.TabIndex = 10;
@@ -177,7 +167,7 @@
             // 
             // btnInit
             // 
-            this.btnInit.Location = new System.Drawing.Point(217, 301);
+            this.btnInit.Location = new System.Drawing.Point(279, 301);
             this.btnInit.Name = "btnInit";
             this.btnInit.Size = new System.Drawing.Size(129, 47);
             this.btnInit.TabIndex = 9;
@@ -265,6 +255,17 @@
             this.txtName.Size = new System.Drawing.Size(182, 34);
             this.txtName.TabIndex = 0;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(785, 301);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(118, 47);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // ManageProduct
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -293,7 +294,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button btnEditDiscount;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnCreate;
@@ -307,5 +307,6 @@
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtImage;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
