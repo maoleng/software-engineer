@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Winform.ComponentForms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Winform.UserControls
@@ -194,6 +195,13 @@ namespace Winform.UserControls
             reloadListWithSearchAndFilter();
 
             MessageBox.Show("Updated order successfully");
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            DetailOrder form = new DetailOrder(orderId);
+            form.ShowDialog();
+
         }
     }
 

@@ -42,8 +42,7 @@
             this.txtQuery = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.groupActionOrder = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnView = new System.Windows.Forms.Button();
             this.cbPaidStatus = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.slStatus = new System.Windows.Forms.ComboBox();
@@ -200,8 +199,7 @@
             // 
             // groupActionOrder
             // 
-            this.groupActionOrder.Controls.Add(this.button2);
-            this.groupActionOrder.Controls.Add(this.button1);
+            this.groupActionOrder.Controls.Add(this.btnView);
             this.groupActionOrder.Controls.Add(this.cbPaidStatus);
             this.groupActionOrder.Controls.Add(this.label1);
             this.groupActionOrder.Controls.Add(this.slStatus);
@@ -215,23 +213,15 @@
             this.groupActionOrder.TabStop = false;
             this.groupActionOrder.Text = "Action";
             // 
-            // button2
+            // btnView
             // 
-            this.button2.Location = new System.Drawing.Point(180, 123);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 47);
-            this.button2.TabIndex = 28;
-            this.button2.Text = "Print";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(24, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 47);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "View";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnView.Location = new System.Drawing.Point(24, 123);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(129, 47);
+            this.btnView.TabIndex = 27;
+            this.btnView.Text = "View";
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // cbPaidStatus
             // 
@@ -301,7 +291,6 @@
         private System.Windows.Forms.ComboBox slStatus;
         private System.Windows.Forms.CheckBox cbPaidStatus;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnView;
     }
 }
