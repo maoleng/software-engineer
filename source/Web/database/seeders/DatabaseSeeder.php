@@ -165,14 +165,14 @@ class DatabaseSeeder extends Seeder
                 'name' => 'The Administrator',
                 'email' => 'admin',
                 'password' => password_hash('1234', PASSWORD_DEFAULT),
-                'role' => AdminRole::ADMIN,
+                'is_admin_master' => true,
                 'created_at' => now()->toDateTimeString(),
             ],
             [
                 'name' => 'The Accountant',
                 'email' => 'accountant',
                 'password' => password_hash('1234', PASSWORD_DEFAULT),
-                'role' => AdminRole::ACCOUNTANT,
+                'is_admin_master' => false,
                 'created_at' => now()->toDateTimeString(),
             ],
         ];

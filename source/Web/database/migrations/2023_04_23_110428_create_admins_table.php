@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('Admin', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('role');
+            $table->boolean('is_admin_master');
             $table->string('email');
             $table->string('password');
+            $table->boolean('active')->default(true);
             $table->dateTime('created_at');
         });
     }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('password')->nullable();
             $table->boolean('is_agent');
+            $table->boolean('active')->default(true);
             $table->dateTime('created_at');
         });
     }

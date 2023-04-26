@@ -11,6 +11,6 @@ class Admin extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'created_at',
+        'name', 'email', 'password', 'is_admin_master', 'active', 'created_at',
     ];
 }
