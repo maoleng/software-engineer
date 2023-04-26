@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('status');
+            $table->integer('status');
             $table->boolean('is_paid')->default(0);
             $table->double('ship_fee')->default(0);
             $table->double('product_price');

@@ -25,7 +25,7 @@ namespace Winform
         public string address { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
-        public string status { get; set; }
+        public int status { get; set; }
         public bool is_paid { get; set; }
         public double ship_fee { get; set; }
         public double product_price { get; set; }
