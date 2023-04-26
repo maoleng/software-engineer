@@ -32,6 +32,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tblDiscounts = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtImage = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tblProduct)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblDiscounts)).BeginInit();
@@ -71,7 +71,7 @@
             this.groupBox1.Controls.Add(this.tblDiscounts);
             this.groupBox1.Controls.Add(this.tblProduct);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(15, 383);
+            this.groupBox1.Location = new System.Drawing.Point(16, 376);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(918, 354);
             this.groupBox1.TabIndex = 3;
@@ -114,6 +114,17 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Product Detail";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(785, 301);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(118, 47);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // label5
             // 
@@ -216,7 +227,7 @@
             // 
             this.slCategory.Enabled = false;
             this.slCategory.FormattingEnabled = true;
-            this.slCategory.Location = new System.Drawing.Point(724, 45);
+            this.slCategory.Location = new System.Drawing.Point(724, 48);
             this.slCategory.Name = "slCategory";
             this.slCategory.Size = new System.Drawing.Size(179, 37);
             this.slCategory.TabIndex = 4;
@@ -233,7 +244,7 @@
             // txtPrice
             // 
             this.txtPrice.Enabled = false;
-            this.txtPrice.Location = new System.Drawing.Point(561, 45);
+            this.txtPrice.Location = new System.Drawing.Point(561, 48);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(156, 34);
             this.txtPrice.TabIndex = 2;
@@ -254,17 +265,6 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(182, 34);
             this.txtName.TabIndex = 0;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(785, 301);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(118, 47);
-            this.btnDelete.TabIndex = 16;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // ManageProduct
             // 
