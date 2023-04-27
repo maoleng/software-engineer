@@ -68,9 +68,10 @@ namespace Winform
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
+            MessageBox.Show("Logged out successfully");
+            LoginForm form = new LoginForm();
+            form.Show();
         }
-
-      
     }
 }
