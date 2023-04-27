@@ -87,7 +87,6 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create();
         $import = Import::query()->create([
             'product_price' => 0,
-            'ship_price' => 200000,
             'created_at' => now()->subMonths(15),
         ]);
 

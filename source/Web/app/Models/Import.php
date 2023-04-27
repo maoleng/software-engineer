@@ -12,7 +12,7 @@ class Import extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'product_price', 'ship_price', 'created_at',
+        'product_price', 'created_at',
     ];
 
     public function importProducts(): BelongsToMany

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('Import', function (Blueprint $table) {
             $table->id();
             $table->double('product_price');
-            $table->double('ship_price')->default(0);
             $table->dateTime('created_at');
         });
     }

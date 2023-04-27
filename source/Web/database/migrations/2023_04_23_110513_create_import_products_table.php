@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('Product');
             $table->integer('amount');
             $table->double('price');
+            $table->primary(['import_id', 'product_id']);
         });
     }
 

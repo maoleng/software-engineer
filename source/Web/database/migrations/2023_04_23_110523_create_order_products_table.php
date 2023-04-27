@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('price');
             $table->double('discount_price')->default(0);
             $table->double('original_price');
+            $table->primary(['order_id', 'product_id']);
         });
     }
 
