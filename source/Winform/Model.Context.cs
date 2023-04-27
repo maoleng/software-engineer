@@ -29,12 +29,12 @@ namespace Winform
         public virtual DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<failed_jobs> failed_jobs { get; set; }
         public virtual DbSet<Import> Imports { get; set; }
+        public virtual DbSet<ImportProduct> ImportProducts { get; set; }
         public virtual DbSet<migration> migrations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
         public virtual DbSet<personal_access_tokens> personal_access_tokens { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<ImportProduct> ImportProducts { get; set; }
-        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
     }
 }

@@ -22,7 +22,6 @@ namespace Winform
     
         public long id { get; set; }
         public double product_price { get; set; }
-        public double ship_price { get; set; }
         public System.DateTime created_at { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

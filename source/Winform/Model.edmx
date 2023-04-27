@@ -44,17 +44,12 @@
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="product_price" Type="float" Nullable="false" />
-          <Property Name="ship_price" Type="float" Nullable="false" />
           <Property Name="created_at" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'software_engineer.dbo.ImportProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ImportProduct">
           <Key>
             <PropertyRef Name="import_id" />
             <PropertyRef Name="product_id" />
-            <PropertyRef Name="amount" />
-            <PropertyRef Name="price" />
           </Key>
           <Property Name="import_id" Type="bigint" Nullable="false" />
           <Property Name="product_id" Type="bigint" Nullable="false" />
@@ -89,17 +84,10 @@ warning 6002: The table/view 'software_engineer.dbo.ImportProduct' does not have
           <Property Name="transaction_code" Type="nvarchar" MaxLength="255" />
           <Property Name="created_at" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderProduct">
           <Key>
             <PropertyRef Name="order_id" />
             <PropertyRef Name="product_id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="amount" />
-            <PropertyRef Name="price" />
-            <PropertyRef Name="discount_price" />
-            <PropertyRef Name="original_price" />
           </Key>
           <Property Name="order_id" Type="bigint" Nullable="false" />
           <Property Name="product_id" Type="bigint" Nullable="false" />
@@ -239,30 +227,13 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="failed_jobs" EntityType="Self.failed_jobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Import" EntityType="Self.Import" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImportProduct" EntityType="Self.ImportProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="migrations" EntityType="Self.migrations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="personal_access_tokens" EntityType="Self.personal_access_tokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ImportProduct" EntityType="Self.ImportProduct" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ImportProduct].[import_id] AS [import_id], 
-    [ImportProduct].[product_id] AS [product_id], 
-    [ImportProduct].[amount] AS [amount], 
-    [ImportProduct].[price] AS [price]
-    FROM [dbo].[ImportProduct] AS [ImportProduct]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [OrderProduct].[order_id] AS [order_id], 
-    [OrderProduct].[product_id] AS [product_id], 
-    [OrderProduct].[name] AS [name], 
-    [OrderProduct].[amount] AS [amount], 
-    [OrderProduct].[price] AS [price], 
-    [OrderProduct].[discount_price] AS [discount_price], 
-    [OrderProduct].[original_price] AS [original_price]
-    FROM [dbo].[OrderProduct] AS [OrderProduct]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="discount_product_id_foreign" Association="Self.discount_product_id_foreign">
             <End Role="Product" EntitySet="Product" />
             <End Role="Discount" EntitySet="Discount" />
@@ -338,9 +309,20 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="product_price" Type="Double" Nullable="false" />
-          <Property Name="ship_price" Type="Double" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="ImportProducts" Relationship="Self.importproduct_import_id_foreign" FromRole="Import" ToRole="ImportProduct" />
+        </EntityType>
+        <EntityType Name="ImportProduct">
+          <Key>
+            <PropertyRef Name="import_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="import_id" Type="Int64" Nullable="false" />
+          <Property Name="product_id" Type="Int64" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Import" Relationship="Self.importproduct_import_id_foreign" FromRole="ImportProduct" ToRole="Import" />
+          <NavigationProperty Name="Product" Relationship="Self.importproduct_product_id_foreign" FromRole="ImportProduct" ToRole="Product" />
         </EntityType>
         <EntityType Name="migration">
           <Key>
@@ -372,6 +354,21 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <NavigationProperty Name="Admin" Relationship="Self.order_admin_id_foreign" FromRole="Order" ToRole="Admin" />
           <NavigationProperty Name="User" Relationship="Self.order_user_id_foreign" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderProducts" Relationship="Self.orderproduct_order_id_foreign" FromRole="Order" ToRole="OrderProduct" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="order_id" Type="Int64" Nullable="false" />
+          <Property Name="product_id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="discount_price" Type="Double" Nullable="false" />
+          <Property Name="original_price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.orderproduct_order_id_foreign" FromRole="OrderProduct" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.orderproduct_product_id_foreign" FromRole="OrderProduct" ToRole="Product" />
         </EntityType>
         <EntityType Name="personal_access_tokens">
           <Key>
@@ -418,40 +415,6 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="Self.order_user_id_foreign" FromRole="User" ToRole="Order" />
         </EntityType>
-        <EntityType Name="ImportProduct">
-          <Key>
-            <PropertyRef Name="import_id" />
-            <PropertyRef Name="product_id" />
-            <PropertyRef Name="amount" />
-            <PropertyRef Name="price" />
-          </Key>
-          <Property Name="import_id" Type="Int64" Nullable="false" />
-          <Property Name="product_id" Type="Int64" Nullable="false" />
-          <Property Name="amount" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Import" Relationship="Self.importproduct_import_id_foreign" FromRole="ImportProduct" ToRole="Import" />
-          <NavigationProperty Name="Product" Relationship="Self.importproduct_product_id_foreign" FromRole="ImportProduct" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="OrderProduct">
-          <Key>
-            <PropertyRef Name="order_id" />
-            <PropertyRef Name="product_id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="amount" />
-            <PropertyRef Name="price" />
-            <PropertyRef Name="discount_price" />
-            <PropertyRef Name="original_price" />
-          </Key>
-          <Property Name="order_id" Type="Int64" Nullable="false" />
-          <Property Name="product_id" Type="Int64" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="amount" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Double" Nullable="false" />
-          <Property Name="discount_price" Type="Double" Nullable="false" />
-          <Property Name="original_price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.orderproduct_order_id_foreign" FromRole="OrderProduct" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="Self.orderproduct_product_id_foreign" FromRole="OrderProduct" ToRole="Product" />
-        </EntityType>
         <Association Name="order_admin_id_foreign">
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -488,6 +451,18 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="importproduct_product_id_foreign">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ImportProduct" Type="Self.ImportProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ImportProduct">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="order_user_id_foreign">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -512,18 +487,6 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="importproduct_product_id_foreign">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ImportProduct" Type="Self.ImportProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ImportProduct">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="orderproduct_product_id_foreign">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
@@ -541,13 +504,13 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <EntitySet Name="Discounts" EntityType="Self.Discount" />
           <EntitySet Name="failed_jobs" EntityType="Self.failed_jobs" />
           <EntitySet Name="Imports" EntityType="Self.Import" />
+          <EntitySet Name="ImportProducts" EntityType="Self.ImportProduct" />
           <EntitySet Name="migrations" EntityType="Self.migration" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderProducts" EntityType="Self.OrderProduct" />
           <EntitySet Name="personal_access_tokens" EntityType="Self.personal_access_tokens" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="ImportProducts" EntityType="Self.ImportProduct" />
-          <EntitySet Name="OrderProducts" EntityType="Self.OrderProduct" />
           <AssociationSet Name="order_admin_id_foreign" Association="Self.order_admin_id_foreign">
             <End Role="Admin" EntitySet="Admins" />
             <End Role="Order" EntitySet="Orders" />
@@ -560,6 +523,10 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
             <End Role="Import" EntitySet="Imports" />
             <End Role="ImportProduct" EntitySet="ImportProducts" />
           </AssociationSet>
+          <AssociationSet Name="importproduct_product_id_foreign" Association="Self.importproduct_product_id_foreign">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ImportProduct" EntitySet="ImportProducts" />
+          </AssociationSet>
           <AssociationSet Name="order_user_id_foreign" Association="Self.order_user_id_foreign">
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
@@ -567,10 +534,6 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
           <AssociationSet Name="orderproduct_order_id_foreign" Association="Self.orderproduct_order_id_foreign">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderProduct" EntitySet="OrderProducts" />
-          </AssociationSet>
-          <AssociationSet Name="importproduct_product_id_foreign" Association="Self.importproduct_product_id_foreign">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ImportProduct" EntitySet="ImportProducts" />
           </AssociationSet>
           <AssociationSet Name="orderproduct_product_id_foreign" Association="Self.orderproduct_product_id_foreign">
             <End Role="Product" EntitySet="Products" />
@@ -624,8 +587,17 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
               <MappingFragment StoreEntitySet="Import">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="product_price" ColumnName="product_price" />
-                <ScalarProperty Name="ship_price" ColumnName="ship_price" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImportProducts">
+            <EntityTypeMapping TypeName="SoftwareEngineerModel.ImportProduct">
+              <MappingFragment StoreEntitySet="ImportProduct">
+                <ScalarProperty Name="import_id" ColumnName="import_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -656,6 +628,19 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
                 <ScalarProperty Name="bank_code" ColumnName="bank_code" />
                 <ScalarProperty Name="transaction_code" ColumnName="transaction_code" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProducts">
+            <EntityTypeMapping TypeName="SoftwareEngineerModel.OrderProduct">
+              <MappingFragment StoreEntitySet="OrderProduct">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="discount_price" ColumnName="discount_price" />
+                <ScalarProperty Name="original_price" ColumnName="original_price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -700,29 +685,6 @@ warning 6002: The table/view 'software_engineer.dbo.OrderProduct' does not have 
                 <ScalarProperty Name="is_agent" ColumnName="is_agent" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ImportProducts">
-            <EntityTypeMapping TypeName="SoftwareEngineerModel.ImportProduct">
-              <MappingFragment StoreEntitySet="ImportProduct">
-                <ScalarProperty Name="import_id" ColumnName="import_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="price" ColumnName="price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderProducts">
-            <EntityTypeMapping TypeName="SoftwareEngineerModel.OrderProduct">
-              <MappingFragment StoreEntitySet="OrderProduct">
-                <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="discount_price" ColumnName="discount_price" />
-                <ScalarProperty Name="original_price" ColumnName="original_price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
