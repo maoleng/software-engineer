@@ -60,6 +60,7 @@
             this.tblImport.RowTemplate.Height = 24;
             this.tblImport.Size = new System.Drawing.Size(532, 299);
             this.tblImport.TabIndex = 2;
+            this.tblImport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblImport_CellContentClick);
             // 
             // groupBox1
             // 

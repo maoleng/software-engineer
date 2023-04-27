@@ -89,6 +89,12 @@
     <Compile Include="ComponentForms\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComponentForms\DetailImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentForms\DetailImport.Designer.cs">
+      <DependentUpon>DetailImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComponentForms\DetailOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </Compile>
     <EmbeddedResource Include="ComponentForms\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentForms\DetailImport.resx">
+      <DependentUpon>DetailImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComponentForms\DetailOrder.resx">
       <DependentUpon>DetailOrder.cs</DependentUpon>

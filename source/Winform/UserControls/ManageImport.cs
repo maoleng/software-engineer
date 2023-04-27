@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Winform.ComponentForms;
 
 namespace Winform.UserControls
 {
@@ -156,12 +157,21 @@ namespace Winform.UserControls
         private void btnImport_Click(object sender, EventArgs e)
         {
             double total = importProducts.Sum(i => i.amount * i.price);
-            db.Imports.Add(new Import()
+            Import import = db.Imports.Add(new Import()
             {
                 product_price = total,
-                ship_price = 0,
                 created_at = DateTime.Now,
             });
+            foreach (ImportProduct importProduct in importProducts)
+            {
+                db.ImportProducts.Add(new ImportProduct
+                {
+                    import_id = import.id,
+                    product_id = importProduct.product_id,
+                    amount = importProduct.amount,
+                    price = importProduct.price,
+                });
+            }
             db.SaveChanges();
          
             importProducts.Clear();
@@ -169,6 +179,16 @@ namespace Winform.UserControls
             tblAddedList.DataSource = null;
 
             MessageBox.Show("Imported successfully");
+        }
+
+        private void tblImport_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = tblImport.Rows[e.RowIndex];
+            int id = Convert.ToInt32(row.Cells["id"].Value);
+            importId = id;
+
+            DetailImport form = new DetailImport(importId);
+            form.ShowDialog();
         }
     }
 }
