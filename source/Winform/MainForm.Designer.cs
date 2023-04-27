@@ -76,16 +76,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(208, 696);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(208, 753);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnStatistic
             // 
             this.btnStatistic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStatistic.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStatistic.Location = new System.Drawing.Point(3, 525);
+            this.btnStatistic.Location = new System.Drawing.Point(3, 567);
             this.btnStatistic.Name = "btnStatistic";
-            this.btnStatistic.Size = new System.Drawing.Size(202, 81);
+            this.btnStatistic.Size = new System.Drawing.Size(202, 88);
             this.btnStatistic.TabIndex = 9;
             this.btnStatistic.Text = "Statistic";
             this.btnStatistic.UseVisualStyleBackColor = true;
@@ -95,9 +95,9 @@
             // 
             this.btnLogout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Location = new System.Drawing.Point(3, 612);
+            this.btnLogout.Location = new System.Drawing.Point(3, 661);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(202, 81);
+            this.btnLogout.Size = new System.Drawing.Size(202, 89);
             this.btnLogout.TabIndex = 8;
             this.btnLogout.Text = "Log Out";
             this.btnLogout.UseVisualStyleBackColor = true;
@@ -107,9 +107,9 @@
             // 
             this.btnCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCustomer.Location = new System.Drawing.Point(3, 177);
+            this.btnCustomer.Location = new System.Drawing.Point(3, 191);
             this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(202, 81);
+            this.btnCustomer.Size = new System.Drawing.Size(202, 88);
             this.btnCustomer.TabIndex = 2;
             this.btnCustomer.Text = "Customer";
             this.btnCustomer.UseVisualStyleBackColor = true;
@@ -119,9 +119,9 @@
             // 
             this.btnOrder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOrder.Location = new System.Drawing.Point(3, 90);
+            this.btnOrder.Location = new System.Drawing.Point(3, 97);
             this.btnOrder.Name = "btnOrder";
-            this.btnOrder.Size = new System.Drawing.Size(202, 81);
+            this.btnOrder.Size = new System.Drawing.Size(202, 88);
             this.btnOrder.TabIndex = 3;
             this.btnOrder.Text = "Order";
             this.btnOrder.UseVisualStyleBackColor = true;
@@ -131,9 +131,9 @@
             // 
             this.btnProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProduct.Location = new System.Drawing.Point(3, 264);
+            this.btnProduct.Location = new System.Drawing.Point(3, 285);
             this.btnProduct.Name = "btnProduct";
-            this.btnProduct.Size = new System.Drawing.Size(202, 81);
+            this.btnProduct.Size = new System.Drawing.Size(202, 88);
             this.btnProduct.TabIndex = 4;
             this.btnProduct.Text = "Product";
             this.btnProduct.UseVisualStyleBackColor = true;
@@ -143,9 +143,9 @@
             // 
             this.btnImport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImport.Location = new System.Drawing.Point(3, 351);
+            this.btnImport.Location = new System.Drawing.Point(3, 379);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(202, 81);
+            this.btnImport.Size = new System.Drawing.Size(202, 88);
             this.btnImport.TabIndex = 5;
             this.btnImport.Text = "Import";
             this.btnImport.UseVisualStyleBackColor = true;
@@ -155,9 +155,9 @@
             // 
             this.btnEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmployee.Location = new System.Drawing.Point(3, 438);
+            this.btnEmployee.Location = new System.Drawing.Point(3, 473);
             this.btnEmployee.Name = "btnEmployee";
-            this.btnEmployee.Size = new System.Drawing.Size(202, 81);
+            this.btnEmployee.Size = new System.Drawing.Size(202, 88);
             this.btnEmployee.TabIndex = 6;
             this.btnEmployee.Text = "HRM";
             this.btnEmployee.UseVisualStyleBackColor = true;
