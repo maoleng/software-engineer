@@ -201,6 +201,7 @@
             this.txtQuery.Name = "txtQuery";
             this.txtQuery.Size = new System.Drawing.Size(216, 34);
             this.txtQuery.TabIndex = 25;
+            this.txtQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuery_KeyDown);
             // 
             // tblProduct
             // 

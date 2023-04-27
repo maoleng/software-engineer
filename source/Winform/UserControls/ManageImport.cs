@@ -130,5 +130,26 @@ namespace Winform.UserControls
         {
             btnImport.Enabled = importProducts.Any();
         }
+
+        private void txtQuery_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+
+            string q = txtQuery.Text;
+
+            tblProduct.DataSource =  db.Products.ToList().Where(p =>
+               p.id.ToString().Contains(q) ||
+               p.name.Contains(q) ||
+               p.price.ToString().Contains(q)
+            ).Select(p => new
+            {
+                p.id,
+                Name = p.name,
+                Price = p.price
+            }).ToList();
+        }
     }
 }
