@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Winform.UserControls
 {
@@ -150,6 +151,24 @@ namespace Winform.UserControls
                 Name = p.name,
                 Price = p.price
             }).ToList();
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            double total = importProducts.Sum(i => i.amount * i.price);
+            db.Imports.Add(new Import()
+            {
+                product_price = total,
+                ship_price = 0,
+                created_at = DateTime.Now,
+            });
+            db.SaveChanges();
+         
+            importProducts.Clear();
+            reloadImportList();
+            tblAddedList.DataSource = null;
+
+            MessageBox.Show("Imported successfully");
         }
     }
 }
