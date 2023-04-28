@@ -1,0 +1,31 @@
+﻿<!-- BEGIN: Vendor JS-->
+<script src="@Url.Content("~/app-assets/vendors/js/vendors.min.js")"></script>
+<!-- END: Vendor JS-->
+<!-- BEGIN: Page Vendor JS-->
+@*@RenderSection("page_vendor_script", required: false)*@
+<!-- END: Page Vendor JS-->
+<!-- BEGIN: Theme JS-->
+<script src="@Url.Content("~/app-assets/js/core/app-menu.js")"></script>
+<script src="@Url.Content("~/app-assets/js/core/app.js")"></script>
+<!-- END: Theme JS-->
+<!-- BEGIN: Page JS-->
+@*@RenderSection("page_script", required: false)*@
+<!-- END: Page JS-->
+
+<script>
+    $(window).on('load', function() {
+        if (feather) {
+            feather.replace({
+                width: 14,
+                height: 14
+            });
+        }
+    })
+    $(document).ready(function() {
+        $('#btn-dark_mode').on('click', function() {
+            $.ajax({
+                url: '@Url.RouteUrl("admin.toggle_dark_mode")',
+            })
+        })
+    })
+</script>
