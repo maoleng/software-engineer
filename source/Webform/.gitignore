@@ -1,0 +1,6 @@
+/.vs
+obj/
+bin/
+packages/
+*.edmx.diagram
+*.tt
