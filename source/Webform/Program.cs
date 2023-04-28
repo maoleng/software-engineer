@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 string connectionString = builder.Configuration.GetConnectionString("DBContext");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<SoftwareEntities>(options => options.UseSqlServer(connectionString));
 
 
 
