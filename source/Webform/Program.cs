@@ -11,8 +11,8 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 string connectionString = builder.Configuration.GetConnectionString("DBContext");
 builder.Services.AddDbContext<SoftwareEntities>(options => options.UseSqlServer(connectionString));
 
-
-
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
 var app = builder.Build();
 
 
@@ -25,6 +25,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 
