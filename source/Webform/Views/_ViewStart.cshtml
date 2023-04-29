@@ -1,3 +1,7 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+@using Webform.Helpers
+@inject IHttpContextAccessor HttpContextAccessor
+@{
     Layout = "_Master";
+    ViewData["Session"] = HttpContextAccessor.HttpContext.Session;
 }
