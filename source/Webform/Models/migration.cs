@@ -12,13 +12,10 @@ namespace Webform.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Discount
+    public partial class migration
     {
-        public long id { get; set; }
-        public int need_amount { get; set; }
-        public int percent { get; set; }
-        public long product_id { get; set; }
-    
-        public virtual Product Product { get; set; }
+        public int id { get; set; }
+        public string migration1 { get; set; }
+        public int batch { get; set; }
     }
 }

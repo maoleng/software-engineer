@@ -17,7 +17,7 @@ namespace Webform.Controllers
 				return RedirectToAction("Index", "Auth");
 			}
 
-            return View();
+            return RedirectToAction("Index", "Order");
         }
 
     }

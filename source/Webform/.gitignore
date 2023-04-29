@@ -4,3 +4,4 @@ bin/
 packages/
 *.edmx.diagram
 *.tt
+*.user

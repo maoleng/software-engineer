@@ -12,13 +12,17 @@ namespace Webform.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Discount
+    public partial class personal_access_tokens
     {
         public long id { get; set; }
-        public int need_amount { get; set; }
-        public int percent { get; set; }
-        public long product_id { get; set; }
-    
-        public virtual Product Product { get; set; }
+        public string tokenable_type { get; set; }
+        public long tokenable_id { get; set; }
+        public string name { get; set; }
+        public string token { get; set; }
+        public string abilities { get; set; }
+        public Nullable<System.DateTime> last_used_at { get; set; }
+        public Nullable<System.DateTime> expires_at { get; set; }
+        public Nullable<System.DateTime> created_at { get; set; }
+        public Nullable<System.DateTime> updated_at { get; set; }
     }
 }

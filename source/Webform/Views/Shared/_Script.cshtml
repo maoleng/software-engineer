@@ -2,14 +2,19 @@
 <script src="@Url.Content("~/app-assets/vendors/js/vendors.min.js")"></script>
 <!-- END: Vendor JS-->
 <!-- BEGIN: Page Vendor JS-->
-@*@RenderSection("page_vendor_script", required: false)*@
+
+<script src="@Url.Content("~/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js")"></script>
+<script src="@Url.Content("~/app-assets/vendors/js/extensions/sweetalert2.all.min.js")"></script>
+<script src="@Url.Content("~/app-assets/vendors/js/extensions/polyfill.min.js")"></script>
+
 <!-- END: Page Vendor JS-->
 <!-- BEGIN: Theme JS-->
 <script src="@Url.Content("~/app-assets/js/core/app-menu.js")"></script>
 <script src="@Url.Content("~/app-assets/js/core/app.js")"></script>
 <!-- END: Theme JS-->
 <!-- BEGIN: Page JS-->
-@*@RenderSection("page_script", required: false)*@
+<script src="@Url.Content("~/app-assets/js/scripts/forms/pickers/form-pickers.js")"></script>
+<script src="@Url.Content("~/app-assets/js/scripts/components/components-modals.js")"></script>
 <!-- END: Page JS-->
 
 <script>

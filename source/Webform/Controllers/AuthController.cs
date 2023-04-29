@@ -28,6 +28,7 @@ namespace Webform.Controllers
             string password = form["password"];
 
             Admin? admin = db.Admin.SingleOrDefault(c => c.email == email);
+
             if (admin == null)
             {
                 return RedirectBackWithMessage("Username or Password is incorrect!");

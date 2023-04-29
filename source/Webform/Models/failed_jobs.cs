@@ -12,13 +12,14 @@ namespace Webform.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Discount
+    public partial class failed_jobs
     {
         public long id { get; set; }
-        public int need_amount { get; set; }
-        public int percent { get; set; }
-        public long product_id { get; set; }
-    
-        public virtual Product Product { get; set; }
+        public string uuid { get; set; }
+        public string connection { get; set; }
+        public string queue { get; set; }
+        public string payload { get; set; }
+        public string exception { get; set; }
+        public System.DateTime failed_at { get; set; }
     }
 }
