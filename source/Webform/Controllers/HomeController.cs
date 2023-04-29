@@ -1,24 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using Webform.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Webform.Controllers
 {
-    public class HomeController : BaseController
-	{
-        public HomeController(SoftwareEntities context) : base(context) {}
-
-		[HttpGet("/")]
-        public IActionResult Index()
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
         {
-            Admin? authed = Authed();
-            if (authed == null)
-            {
-				return RedirectToAction("Index", "Auth");
-			}
-
-            return RedirectToAction("Index", "Order");
+            return View();
         }
 
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }
