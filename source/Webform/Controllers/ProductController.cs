@@ -58,6 +58,15 @@ namespace Webform.Controllers
         }
 
 
+        [HttpGet]
+        [Route("/product/create")]
+        public ActionResult Create()
+        {
+            ViewBag.Categories = getCategories();
+
+            return View("~/Views/Product/Create.cshtml");
+        }
+
         Category[] getCategories()
         {
             return new[] {

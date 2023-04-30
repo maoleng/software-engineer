@@ -1,0 +1,120 @@
+﻿@using Webform.Models;
+@{
+    Layout = "~/Views/Shared/_Master.cshtml";
+    List<Product> products = ViewBag.Products;
+    Webform.Controllers.Category[] categories = ViewBag.Categories;
+    Webform.Controllers.Paginate paginate = ViewBag.Paginate;
+}
+@section title { "Manage Product" }
+@section breadcrumb { "Create new product" }
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-start">
+                    <div class="author-info">
+                        <h6 class="mb-25"></h6>
+                    </div>
+                </div>
+                <form action="{{ route('admin.warehouse.store') }}" method="post" enctype="multipart/form-data" class="mt-2">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="mb-2">
+                                <label class="form-label" for="blog-edit-title">Name</label>
+                                <input name="name" value="" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-2">
+                                <label class="form-label" for="blog-edit-category">Category</label>
+                                <select name="category_id" id="blog-edit-category" class="select2 form-select">
+                                    @foreach (var category in categories)
+                                    {
+                                        <option value="@category.CategoryId">@category.CategoryName</option>
+                                    }
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-2">
+                                <label class="form-label" for="blog-edit-slug">Price</label>
+                                <input name="price" value="" type="text" class="form-control numeral-mask" placeholder="10,000" id="numeral-formatting">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-2">
+                                <label class="form-label" for="blog-edit-slug">Expired In (months)</label>
+                                <input name="expire_month" value="" type="text" class="form-control numeral-mask" placeholder="12">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-2">
+                                <label class="form-label" for="blog-edit-slug">Description</label>
+                                <textarea name="description" class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div class="border rounded p-2">
+                                <h4 class="mb-1">Images</h4>
+                                <div class="d-flex flex-column flex-md-row">
+                                    <img src="" id="blog-feature-image" class="rounded me-2 mb-1 mb-md-0" width="170" height="110" alt="Put images here" />
+                                    <div class="featured-info">
+                                        <small class="text-muted">Required image size lower than 10mb.</small>
+                                        <p class="my-50">
+                                            <a href="#">Allow multiple images</a>
+                                        </p>
+                                        <div class="d-inline-block">
+                                            <input name="images[]" class="form-control" type="file" id="blogCustomFile" accept="image/*" multiple />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-50">
+                            <button type="submit" class="btn btn-primary me-1">Save</button>
+                            <a href="@Url.Action("Index", "Product")" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+                <!--/ Form -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script src="@Url.Content("~/Assets/app-assets/js/scripts/pages/page-blog-edit.js")"></script>
+    <script src="@Url.Content("~/Assets/app-assets/js/scripts/forms/form-input-mask.js")"></script>
+    <script>alertDangerEvent('.btn-del')</script>
+    @if (TempData["success"] != null)
+    {
+        <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully!',
+            text: '@TempData["success"]',
+            customClass: {
+                confirmButton: 'btn btn-success'
+            }
+        });
+        </script>
+    }
+    @if (TempData["error"] != null)
+    {
+        <script>
+        Swal.fire({
+            title: 'Error!',
+            text: '@TempData["error"]',
+            icon: 'error',
+            customClass: {
+                confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+        })
+        </script>
+    }
+    
+
+
+}

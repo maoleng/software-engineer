@@ -2056,6 +2056,7 @@
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\Order\Print.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

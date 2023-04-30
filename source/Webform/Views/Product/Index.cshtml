@@ -14,14 +14,14 @@
                 <div class="col-lg-6 d-flex align-items-start">
                     <div class="dt-action-buttons text-xl-end text-lg-start text-lg-end text-start ">
                         <div class="dt-buttons">
-                            <a href="{{ route('admin.warehouse.create') }}" class="dt-button btn btn-primary btn-add-record ms-2" tabindex="0" aria-controls="DataTables_Table_0" type="button">
+                            <a href="@Url.Action("Create", "Product")" class="dt-button btn btn-primary btn-add-record ms-2" tabindex="0" aria-controls="DataTables_Table_0" type="button">
                                 <span>Add Product</span>
                             </a>
                         </div>
                     </div>
                     <div class="dt-action-buttons text-xl-end text-lg-start text-lg-end text-start ">
                         <div class="dt-buttons">
-                            <a href="{{ route('admin.warehouse.import') }}" class="dt-button btn btn-success btn-add-record ms-2" tabindex="0" aria-controls="DataTables_Table_0" type="button">
+                            <a href="@Url.Action("Import", "Product")" class="dt-button btn btn-success btn-add-record ms-2" tabindex="0" aria-controls="DataTables_Table_0" type="button">
                                 <span>Import Products</span>
                             </a>
                         </div>
