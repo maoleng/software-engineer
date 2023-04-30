@@ -29,7 +29,7 @@
     $(document).ready(function() {
         $('#btn-dark_mode').on('click', function() {
             $.ajax({
-                url: '@Url.RouteUrl("admin.toggle_dark_mode")',
+                url: '@*@Url.Actionadmin.toggle_dark_mode("")*@',
             })
         })
     })
