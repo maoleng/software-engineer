@@ -114,6 +114,10 @@ namespace Webform.Controllers
         [Route("/Order/Show")]
         public ActionResult Show(int? order_id)
         {
+            if (order_id == null)
+            {
+                return new EmptyResult();
+            }
             var model = getOrderDetail(order_id, true);
 
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -123,6 +127,10 @@ namespace Webform.Controllers
         [Route("/Order/Print")]
         public ActionResult Print(int? order_id)
         {
+            if (order_id == null)
+            {
+                return RedirectBack();
+            }
             ViewBag.order = getOrderDetail(order_id);
 
             return View("~/Views/Order/Print.cshtml");
@@ -192,7 +200,7 @@ namespace Webform.Controllers
                     products = products,
                     fee = fee,
                     user = user,
-                    created_at = order.created_at,
+                    created_at = order.created_at.ToString("yyyy/MM/dd HH:mm"),
                     sales = order.Admin?.name,
                     status = order.status,
                     is_paid = order.is_paid
