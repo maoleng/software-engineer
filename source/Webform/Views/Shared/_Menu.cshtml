@@ -78,8 +78,8 @@
                     <span class="menu-title text-truncate" data-i18n="Statistic">Statistic</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="nav-item @(Request.Path.ToString() == @Url.Action("Index", "Statistic") ? "active" : "")"><a class="d-flex align-items-center" href="@Url.Action("Index", "Statistic")"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Revenue">Revenue</span></a></li>
-                    <li class="nav-item @(Request.Path.ToString() == @Url.Action("Index", "Statistic") ? "active" : "")"><a class="d-flex align-items-center" href="@Url.Action("Index", "Statistic")"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Product">Product</span></a></li>
+                    <li class="nav-item @(Request.Path.ToString() == @Url.Action("Product", "Statistic") ? "active" : "")"><a class="d-flex align-items-center" href="@Url.Action("Product", "Statistic")"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Revenue">Revenue</span></a></li>
+                    <li class="nav-item @(Request.Path.ToString() == @Url.Action("Revenue", "Statistic") ? "active" : "")"><a class="d-flex align-items-center" href="@Url.Action("Revenue", "Statistic")"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Product">Product</span></a></li>
                 </ul>
             </li>
         </ul>
