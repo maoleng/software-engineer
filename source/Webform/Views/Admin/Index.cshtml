@@ -89,7 +89,7 @@
                                                 </svg>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <form id="form-@admin.id" action="@Url.Action("Cancel", "Admin", new { id = admin.id })" method="post">
+                                                <form action="@Url.Action("Cancel", "Admin", new { id = admin.id })" method="post">
                                                     @if (admin.active)
                                                     {
                                                         <button type="button" data-message="You are locking account" class="btn-lock dropdown-item" style="width: 100%">
@@ -98,10 +98,15 @@
                                                     }
                                                     else
                                                     {
-                                                        <button type="button" data - message="You are unlocking account" class="btn-lock dropdown-item" style="width: 100%">
+                                                        <button type="button" data-message="You are unlocking account" class="btn-lock dropdown-item" style="width: 100%">
                                                             <span>Unlock</span>
                                                         </button>
                                                     }
+                                                </form>
+                                                <form action="@Url.Action("Reset", "Admin", new { id = admin.id })" method="post">
+                                                    <button type="button" data-message="You are resetting password" class="btn-reset dropdown-item" style="width: 100%">
+                                                        <span>Reset password</span>
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
@@ -221,9 +226,8 @@
         </script>
     }
     <script>
-        const btn_lock = $('.btn-lock')
-        btn_lock.on('click', function () {
-            const form_id = $(this).parent().attr('id')
+        $('.btn-reset').on('click', function () {
+            const form = $(this).parent()
             Swal.fire({
                 title: 'Are you sure?',
                 text: $(this).data('message'),
@@ -237,7 +241,26 @@
                 buttonsStyling: false
             }).then(function (result) {
                 if (result.value) {
-                    $(`#${form_id}`).submit()
+                    form.submit()
+                }
+            });
+        })
+        $('.btn-lock').on('click', function () {
+            const form = $(this).parent()
+            Swal.fire({
+                title: 'Are you sure?',
+                text: $(this).data('message'),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes!',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-outline-danger ms-1'
+                },
+                buttonsStyling: false
+            }).then(function (result) {
+                if (result.value) {
+                    form.submit()
                 }
             });
         });

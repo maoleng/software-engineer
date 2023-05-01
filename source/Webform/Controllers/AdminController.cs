@@ -97,6 +97,24 @@ namespace Webform.Controllers
             return RedirectBack();
         }
 
+        [HttpPost]
+        [Route("/hrm")]
+        public ActionResult Reset(int id)
+        {
+            Admin admin = db.Admins.Find(id);
+            if (admin.is_admin_master)
+            {
+                TempData["error"] = "Can not handle on admin master";
+
+                return RedirectBack();
+            }
+            admin.password = BCrypt.Net.BCrypt.HashPassword(admin.email);
+            db.SaveChanges();
+
+            TempData["success"] = "Password reset successfully";
+
+            return RedirectBack();
+        }
 
     }
 }
