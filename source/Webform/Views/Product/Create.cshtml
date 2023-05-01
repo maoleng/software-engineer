@@ -17,7 +17,7 @@
                         <h6 class="mb-25"></h6>
                     </div>
                 </div>
-                <form action="{{ route('admin.warehouse.store') }}" method="post" enctype="multipart/form-data" class="mt-2">
+                <form action="@Url.Action("Store", "Product")" method="post" enctype="multipart/form-data" class="mt-2">
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="mb-2">
@@ -28,7 +28,7 @@
                         <div class="col-md-6 col-12">
                             <div class="mb-2">
                                 <label class="form-label" for="blog-edit-category">Category</label>
-                                <select name="category_id" id="blog-edit-category" class="select2 form-select">
+                                <select name="category" id="blog-edit-category" class="select2 form-select">
                                     @foreach (var category in categories)
                                     {
                                         <option value="@category.CategoryId">@category.CategoryName</option>
@@ -40,12 +40,6 @@
                             <div class="mb-2">
                                 <label class="form-label" for="blog-edit-slug">Price</label>
                                 <input name="price" value="" type="text" class="form-control numeral-mask" placeholder="10,000" id="numeral-formatting">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <div class="mb-2">
-                                <label class="form-label" for="blog-edit-slug">Expired In (months)</label>
-                                <input name="expire_month" value="" type="text" class="form-control numeral-mask" placeholder="12">
                             </div>
                         </div>
                         <div class="col-12">
@@ -62,10 +56,10 @@
                                     <div class="featured-info">
                                         <small class="text-muted">Required image size lower than 10mb.</small>
                                         <p class="my-50">
-                                            <a href="#">Allow multiple images</a>
+                                            <a href="#">Allow 1 image</a>
                                         </p>
                                         <div class="d-inline-block">
-                                            <input name="images[]" class="form-control" type="file" id="blogCustomFile" accept="image/*" multiple />
+                                            <input name="image" class="form-control" type="file" id="blogCustomFile" accept="image/*" />
                                         </div>
                                     </div>
                                 </div>

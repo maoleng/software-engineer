@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using System.Xml.Linq;
 using Webform.Models;
 
 namespace Webform.Controllers
@@ -44,7 +50,7 @@ namespace Webform.Controllers
                 );
             }
 
-            var products = builder.OrderBy(o => o.created_at)
+            var products = builder.OrderByDescending(o => o.created_at)
                                 .ThenByDescending(o => o.created_at)
                                 .Skip((page - 1) * pageSize)
                                 .Take(pageSize)
@@ -65,6 +71,64 @@ namespace Webform.Controllers
             ViewBag.Categories = getCategories();
 
             return View("~/Views/Product/Create.cshtml");
+        }
+
+
+        [HttpPost]
+        [Route("/product/store")]
+        public ActionResult Store(HttpPostedFileBase image, FormCollection data)
+        {
+            if (string.IsNullOrEmpty(data["category"]) || string.IsNullOrEmpty(data["name"]) ||
+                string.IsNullOrEmpty(data["price"]) || string.IsNullOrEmpty(data["description"]) ||
+                image == null || image.ContentLength == 0)
+            {
+                TempData["error"] = "Field must not be empty";
+
+                return RedirectBack();
+            }
+
+            db.Products.Add(new Product()
+            {
+                category = Convert.ToInt32(data["category"]),
+                name = data["name"],
+                price = Convert.ToDouble(data["price"]),
+                description = data["description"],
+                image = uploadFile(image),
+                created_at = DateTime.Now,
+            });
+            db.SaveChanges();
+            TempData["success"] = "Create product successfully";
+
+            return RedirectToAction("Index", "Product");
+        }
+
+        private string uploadFile(HttpPostedFileBase image)
+        {
+            byte[] fileData = new byte[image.InputStream.Length];
+            image.InputStream.Read(fileData, 0, fileData.Length);
+
+            using (WebClient client = new WebClient())
+            {
+                client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                string apiUrl = "https://api.imgbb.com/1/upload";
+                string apiKey = "44c3abcbb4d3f91a34d5d66a5f232cce";
+                string expiration = "0";
+                string imageData = Convert.ToBase64String(fileData);
+
+                NameValueCollection requestBody = new NameValueCollection();
+                requestBody.Add("key", apiKey);
+                requestBody.Add("expiration", expiration);
+                requestBody.Add("image", imageData);
+
+                byte[] responseBytes = client.UploadValues(apiUrl, "POST", requestBody);
+                string response = Encoding.UTF8.GetString(responseBytes);
+
+                dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(response);
+                string imageUrl = jsonResponse.data.image.url;
+
+
+                return imageUrl;
+            }
         }
 
         Category[] getCategories()
