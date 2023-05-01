@@ -25,6 +25,7 @@ namespace Webform.Controllers
         public ActionResult Index(string category, string created_at, string q, int page = 1)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             int pageSize = 20;
 
@@ -72,6 +73,7 @@ namespace Webform.Controllers
         public ActionResult Create()
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             ViewBag.Categories = getCategories();
 
@@ -84,6 +86,7 @@ namespace Webform.Controllers
         public ActionResult Edit(int id)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             ViewBag.Product = db.Products.Find(id);
             ViewBag.Categories = getCategories();
@@ -97,6 +100,7 @@ namespace Webform.Controllers
         public ActionResult Update(int id, HttpPostedFileBase image, FormCollection data)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             if (string.IsNullOrEmpty(data["category"]) || string.IsNullOrEmpty(data["name"]) ||
                 string.IsNullOrEmpty(data["price"]) || string.IsNullOrEmpty(data["description"]))
@@ -133,6 +137,7 @@ namespace Webform.Controllers
         public ActionResult Store(HttpPostedFileBase image, FormCollection data)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             if (string.IsNullOrEmpty(data["category"]) || string.IsNullOrEmpty(data["name"]) ||
                 string.IsNullOrEmpty(data["price"]) || string.IsNullOrEmpty(data["description"]) ||
@@ -165,6 +170,7 @@ namespace Webform.Controllers
         public ActionResult Destroy(int id)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             Product product = db.Products.Find(id);
 

@@ -18,7 +18,7 @@ namespace Webform.Controllers
                 return View("~/Views/Login.cshtml");
             }
 
-            return View("~/Views/Order/Index.cshtml");
+            return RedirectToAction("Index", "Order");
         }
 
     }

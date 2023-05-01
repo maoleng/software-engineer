@@ -1,15 +1,13 @@
 ﻿@using Webform.Models;
 @{
     Layout = "~/Views/Shared/_Master.cshtml";
-    List
-    <Order>
-    orders = ViewBag.Orders;
+    List <Order> orders = ViewBag.Orders;
     Webform.Controllers.Paginate paginate = ViewBag.Paginate;
     string[] statusDescription = { "Unprocessed", "Delivering", "Cancelled", "Decline", "Successful", "Destroy" };
     int[] isPaidOrderStatus = { 0, 1, 4 };
     int[] orderStatus = { 0, 1 };
 }
-@section title { "Manage Order" }
+@section title { Manage Order }
 <div class="row" id="basic-table">
     <div class="col-12">
         <div class="card">

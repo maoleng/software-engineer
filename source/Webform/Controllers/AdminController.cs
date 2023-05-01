@@ -20,6 +20,7 @@ namespace Webform.Controllers
         public ActionResult Index(string created_at, string q, int page = 1)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             int pageSize = 20;
 
@@ -59,6 +60,7 @@ namespace Webform.Controllers
         public ActionResult Store(FormCollection data)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             if (string.IsNullOrEmpty(data["name"]) || string.IsNullOrEmpty(data["email"]))
             {
@@ -88,6 +90,7 @@ namespace Webform.Controllers
         public ActionResult Cancel(int id)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
 
             Admin admin = db.Admins.Find(id);
             if (admin.is_admin_master)
@@ -109,7 +112,7 @@ namespace Webform.Controllers
         public ActionResult Reset(int id)
         {
             if (Authed() == null) return RedirectToAction("Index", "Home");
-
+            if (Authed().is_admin_master == false) return RedirectToAction("Index", "Home");
             Admin admin = db.Admins.Find(id);
             if (admin.is_admin_master)
             {
