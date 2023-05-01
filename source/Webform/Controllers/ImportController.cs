@@ -20,7 +20,7 @@ namespace Webform.Controllers
         [Route("/import")]
         public ActionResult Index(string status, string created_at, string q, int page = 1)
         {
-            //if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed() == null) return RedirectToAction("Index", "Home");
 
             int pageSize = 20;
 
@@ -51,6 +51,8 @@ namespace Webform.Controllers
         [Route("/import/Show")]
         public ActionResult Show(int? import_id)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             if (import_id == null)
             {
                 return new EmptyResult();
@@ -64,6 +66,8 @@ namespace Webform.Controllers
         [Route("/import/Print")]
         public ActionResult Print(int? import_id)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             if (import_id == null)
             {
                 return RedirectBack();
@@ -78,6 +82,8 @@ namespace Webform.Controllers
         [Route("/import/create")]
         public ActionResult Create()
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             ViewBag.Products = db.Products.ToList();
 
             return View("~/Views/Import/Create.cshtml");
@@ -90,6 +96,8 @@ namespace Webform.Controllers
         [Route("/import")]
         public ActionResult Store(FormCollection form)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             Dictionary<string, string> data = form.AllKeys.ToDictionary(k => k, k => form[k]);
 
             if (data.Count % 3 != 0)

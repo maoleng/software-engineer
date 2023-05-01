@@ -24,6 +24,7 @@ namespace Webform.Controllers
         [Route("/product")]
         public ActionResult Index(string category, string created_at, string q, int page = 1)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
 
             int pageSize = 20;
 
@@ -70,6 +71,8 @@ namespace Webform.Controllers
         [Route("/product/create")]
         public ActionResult Create()
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             ViewBag.Categories = getCategories();
 
             return View("~/Views/Product/Create.cshtml");
@@ -80,6 +83,8 @@ namespace Webform.Controllers
         [Route("/product/edit/{id}")]
         public ActionResult Edit(int id)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             ViewBag.Product = db.Products.Find(id);
             ViewBag.Categories = getCategories();
 
@@ -91,6 +96,8 @@ namespace Webform.Controllers
         [Route("/product/update/{id}")]
         public ActionResult Update(int id, HttpPostedFileBase image, FormCollection data)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             if (string.IsNullOrEmpty(data["category"]) || string.IsNullOrEmpty(data["name"]) ||
                 string.IsNullOrEmpty(data["price"]) || string.IsNullOrEmpty(data["description"]))
             {
@@ -125,6 +132,8 @@ namespace Webform.Controllers
         [Route("/product/store")]
         public ActionResult Store(HttpPostedFileBase image, FormCollection data)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             if (string.IsNullOrEmpty(data["category"]) || string.IsNullOrEmpty(data["name"]) ||
                 string.IsNullOrEmpty(data["price"]) || string.IsNullOrEmpty(data["description"]) ||
                 image == null || image.ContentLength == 0)
@@ -155,6 +164,8 @@ namespace Webform.Controllers
         [Route("/product/destroy/{id}")]
         public ActionResult Destroy(int id)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             Product product = db.Products.Find(id);
 
             try

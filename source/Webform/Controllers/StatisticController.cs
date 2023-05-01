@@ -14,11 +14,15 @@ namespace Webform.Controllers
 
         public ActionResult Index()
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             return RedirectToAction("Revenue", "Statistic");
         }
 
         public ActionResult Revenue()
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             var orderIds = db.Orders
                 .Select(o => o.id)
                 .ToList();
@@ -39,6 +43,8 @@ namespace Webform.Controllers
 
         public ActionResult Product()
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
             int totalOrder = db.Orders.Count();
             int monthOrder = db.Orders
@@ -53,6 +59,8 @@ namespace Webform.Controllers
 
         public ActionResult GetRevenue(string dateRange)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             var orders = db.Orders.Where(o => o.status != 5).OrderBy(o => o.created_at).ToList();
             DateTime[] range = getRange(dateRange);
             int dayDiff = (int)(range[1] - range[0]).TotalDays;
@@ -77,6 +85,8 @@ namespace Webform.Controllers
 
         public ActionResult GetProduct(string dateRange)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             DateTime[] range = getRange(dateRange);
             var startDate = range[0];
             var endDate = range[1];

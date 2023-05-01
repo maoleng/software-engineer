@@ -19,7 +19,7 @@ namespace Webform.Controllers
         [Route("/order")]
         public ActionResult Index(string status, string ordered_at, string q, int page = 1)
         {
-            //if (Authed() == null) return RedirectToAction("Index", "Home");
+            if (Authed() == null) return RedirectToAction("Index", "Home");
 
             int pageSize = 20;
 
@@ -69,6 +69,8 @@ namespace Webform.Controllers
         [Route("/Order/Update")]
         public ActionResult Update(FormCollection formCollection)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             var order_id = int.Parse(formCollection["order_id"]);
             var update_data = new Dictionary<string, object>();
             var message = "";
@@ -114,6 +116,8 @@ namespace Webform.Controllers
         [Route("/Order/Show")]
         public ActionResult Show(int? order_id)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             if (order_id == null)
             {
                 return new EmptyResult();
@@ -127,6 +131,8 @@ namespace Webform.Controllers
         [Route("/Order/Print")]
         public ActionResult Print(int? order_id)
         {
+            if (Authed() == null) return RedirectToAction("Index", "Home");
+
             if (order_id == null)
             {
                 return RedirectBack();
