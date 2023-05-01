@@ -69,6 +69,7 @@ namespace Webform.Controllers
                 email = data["email"],
                 password = BCrypt.Net.BCrypt.HashPassword(data["email"]),
                 is_admin_master = false,
+                active = true,
                 created_at = DateTime.Now,
             });
             db.SaveChanges();

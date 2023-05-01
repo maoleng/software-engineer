@@ -1,0 +1,284 @@
+﻿@using Webform.Models;
+@{
+    Layout = "~/Views/Shared/_Master.cshtml";
+    List<User> users = ViewBag.Users;
+    Webform.Controllers.Paginate paginate = ViewBag.Paginate;
+}
+@section title { Manage Customer }
+
+<div class="row" id="basic-table">
+    <div class="col-12">
+        <div class="card">
+            <div class="row d-flex justify-content-between align-items-center m-1">
+                <div class="col-lg-6 d-flex align-items-start">
+                    <div class="dt-action-buttons text-xl-end text-lg-start text-lg-end text-start ">
+                        <div class="dt-buttons">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Add Agent
+                                </button>
+                                <div class="dropdown-menu">
+                                    <form action="@Url.Action("Store", "User")" method="post" class="px-2 py-2 width-350">
+                                        <div class="mb-1">
+                                            <label class="form-label" for="exampleDropdownFormEmail1">Name</label>
+                                            <input name="name" type="text" class="form-control" id="exampleDropdownFormEmail1" placeholder="Name" />
+                                        </div>
+                                        <div class="mb-1">
+                                            <label class="form-label" for="exampleDropdownFormEmail1">Email</label>
+                                            <input name="email" type="text" class="form-control" id="exampleDropdownFormEmail1" placeholder="Email" />
+                                        </div>
+                                        <div class="mb-1">
+                                            <label class="form-label" for="exampleDropdownFormEmail1">Phone</label>
+                                            <input name="email" type="text" class="form-control" id="exampleDropdownFormEmail1" placeholder="Email" />
+                                        </div>
+                                        <div class="mb-1">
+                                            <label class="form-label" for="exampleDropdownFormEmail1">Address</label>
+                                            <input name="email" type="text" class="form-control" id="exampleDropdownFormEmail1" placeholder="Email" />
+                                        </div>
+                                        <div class="mb-0">
+                                            <button type="submit" class="btn btn-primary">Add</button>
+                                        </div>
+                                    </form>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </div>
+                            <div class="btn-group dropup"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pe-lg-1 p-0">
+                    <div style="padding-right: 25px; width: 50%">
+                        @{
+                            string[] createdAtArray = null;
+                            string createdAtString = string.Empty;
+                            if (Request != null && Request.QueryString["created_at"] != null)
+                            {
+                                createdAtArray = Request.QueryString["created_at"].Split(',');
+                                createdAtString = string.Join(" to ", createdAtArray);
+                            }
+                        }
+                        <input value="@createdAtString" id="i-created_at" type="text" class="form-control flatpickr-range flatpickr-input active" placeholder="Filter order time range" readonly="readonly">
+                    </div>
+                    <div>
+                        <input type="search" id="i-search" name="q" value="@Request.QueryString["q"]" class="form-control" placeholder="Search">
+                    </div>
+                    <div class="invoice_status ms-sm-2"></div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Type</th>
+                            <th>Active</th>
+                            <th>Joined at</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (User user in users)
+                        {
+                            <tr>
+                                <td>@user.name</td>
+                                <td>@user.email</td>
+                                <td>@user.phone</td>
+                                <td>@user.address</td>
+                                <td>@(user.is_agent ? "Agent" : "Customer")</td>
+                                <td>@(user.active ? "Activate" : "Unactive")</td>
+                                <td>@user.created_at</td>
+                                <td>
+                                    @if (user.is_agent)
+                                    {
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0 waves-effect waves-float waves-light" data-bs-toggle="dropdown">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                                    <circle cx="12" cy="12" r="1"></circle>
+                                                    <circle cx="12" cy="5" r="1"></circle>
+                                                    <circle cx="12" cy="19" r="1"></circle>
+                                                </svg>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <form action="@Url.Action("Cancel", "User", new { id = user.id })" method="post">
+                                                    @if (user.active)
+                                                    {
+                                                        <button type="button" data-message="You are locking account" class="btn-lock dropdown-item" style="width: 100%">
+                                                            <span>Lock</span>
+                                                        </button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="button" data-message="You are unlocking account" class="btn-lock dropdown-item" style="width: 100%">
+                                                            <span>Unlock</span>
+                                                        </button>
+                                                    }
+                                                </form>
+                                                <form action="@Url.Action("Reset", "User", new { id = user.id })" method="post">
+                                                    <button type="button" data-message="You are resetting password" class="btn-reset dropdown-item" style="width: 100%">
+                                                        <span>Reset password</span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="m-3">
+                @if (paginate.hasPages())
+                {
+                    <nav aria-label="Page navigation">
+                        <div class="d-flex justify-content-between flex-fill d-sm-none">
+                            <ul class="pagination">
+                                @if (paginate.onFirstPage())
+                                {
+                                    <li class="page-item disabled" aria-disabled="true">
+                                        <span class="page-link"><</span>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="@paginate.previousPageUrl()" rel="prev"><</a>
+                                    </li>
+                                }
+                                @if (paginate.hasMorePages())
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="@paginate.nextPageUrl()" rel="next">></a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item disabled" aria-disabled="true">
+                                        <span class="page-link">></span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
+                            <div>
+                                <ul class="pagination">
+                                    @if (paginate.onFirstPage())
+                                    {
+                                        <li class="page-item disabled" aria-disabled="true" aria-label="<">
+                                            <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="@paginate.previousPageUrl()" rel="prev" aria-label="<">&lsaquo;</a>
+                                        </li>
+                                    }
+                                    @for (int i = 1; i <= paginate.totalPages; i++)
+                                    {
+                                        if (i == paginate.currentPage)
+                                        {
+                                            <li class="page-item active" aria-current="page"><span class="page-link">@i</span></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                                        }
+                                    }
+                                    @if (@paginate.hasMorePages())
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="@paginate.nextPageUrl()" rel="next" aria-label=">">&rsaquo;</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item disabled" aria-disabled="true" aria-label=">">
+                                            <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section script{
+    <script src="@Url.Content("~/Assets/assets/js/handle_search.js")"></script>
+    @if (TempData["success"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully!',
+                text: '@TempData["success"]',
+                customClass: {
+                confirmButton: 'btn btn-success'
+                }
+            });
+        </script>
+    }
+    @if (TempData["error"] != null)
+    {
+        <script>
+            Swal.fire({
+                title: 'Error!',
+                text: '@TempData["error"]',
+                icon: 'error',
+                customClass: {
+                confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            })
+        </script>
+    }
+    <script>
+        $('.btn-reset').on('click', function () {
+            const form = $(this).parent()
+            Swal.fire({
+                title: 'Are you sure?',
+                text: $(this).data('message'),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes!',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-outline-danger ms-1'
+                },
+                buttonsStyling: false
+            }).then(function (result) {
+                if (result.value) {
+                    form.submit()
+                }
+            });
+        })
+        $('.btn-lock').on('click', function () {
+            const form = $(this).parent()
+            Swal.fire({
+                title: 'Are you sure?',
+                text: $(this).data('message'),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes!',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-outline-danger ms-1'
+                },
+                buttonsStyling: false
+            }).then(function (result) {
+                if (result.value) {
+                    form.submit()
+                }
+            });
+        });
+
+    </script>
+}
