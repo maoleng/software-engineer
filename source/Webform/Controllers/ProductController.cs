@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -74,6 +75,50 @@ namespace Webform.Controllers
         }
 
 
+        [HttpGet]
+        [Route("/product/edit/{id}")]
+        public ActionResult Edit(int id)
+        {
+            ViewBag.Product = db.Products.Find(id);
+            ViewBag.Categories = getCategories();
+
+            return View("~/Views/Product/Edit.cshtml");
+        }
+        
+        [HttpPost]
+        [Route("/product/update/{id}")]
+        public ActionResult Update(int id, HttpPostedFileBase image, FormCollection data)
+        {
+            if (string.IsNullOrEmpty(data["category"]) || string.IsNullOrEmpty(data["name"]) ||
+                string.IsNullOrEmpty(data["price"]) || string.IsNullOrEmpty(data["description"]))
+            {
+                TempData["error"] = "Field must not be empty";
+
+                return RedirectBack();
+            }
+
+            Product product = db.Products.Find(id);
+
+            product.category = Convert.ToInt32(data["category"]);
+            product.name = data["name"];
+            product.price = Convert.ToDouble(data["price"]);
+            product.description = data["description"];
+            product.created_at = DateTime.Now;
+            if (image != null && image.ContentLength > 0)
+            {
+                product.image = uploadFile(image);
+            }
+           
+            db.SaveChanges();
+
+            TempData["success"] = "Update product successfully";
+
+            return RedirectToAction("Index", "Product");
+        }
+
+
+
+
         [HttpPost]
         [Route("/product/store")]
         public ActionResult Store(HttpPostedFileBase image, FormCollection data)
@@ -100,6 +145,31 @@ namespace Webform.Controllers
             TempData["success"] = "Create product successfully";
 
             return RedirectToAction("Index", "Product");
+        }
+
+
+
+        [HttpPost]
+        [Route("/product/destroy/{id}")]
+        public ActionResult Destroy(int id)
+        {
+            Product product = db.Products.Find(id);
+
+            try
+            {
+                db.Products.Remove(product);
+                db.SaveChanges();
+                TempData["success"] = "Delete product successfully";
+
+                return RedirectToAction("Index", "Product");
+            }
+            catch (DbUpdateException)
+            {
+                db.Products.Add(product);
+                TempData["error"] = "Can not delete because it has relation to others";
+
+                return RedirectToAction("Index", "Product");
+            }
         }
 
         private string uploadFile(HttpPostedFileBase image)
