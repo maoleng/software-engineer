@@ -74,6 +74,81 @@ namespace Webform.Controllers
         }
 
 
+        [HttpGet]
+        [Route("/import/create")]
+        public ActionResult Create()
+        {
+            ViewBag.Products = db.Products.ToList();
+
+            return View("~/Views/Import/Create.cshtml");
+        }
+
+
+
+
+        [HttpPost]
+        [Route("/import")]
+        public ActionResult Store(FormCollection form)
+        {
+            Dictionary<string, string> data = form.AllKeys.ToDictionary(k => k, k => form[k]);
+
+            if (data.Count % 3 != 0)
+            {
+                TempData["error"] = "Product not found or not filled";
+
+                return RedirectToAction("Import", "Product");
+            }
+
+            List<ExpandoObject> products = new List<ExpandoObject>();
+            for (int i = 0; i < data.Count / 3; i++)
+            {
+                dynamic product = new ExpandoObject();
+                product.product_id = data[$"products[{i}][product_id]"];
+                product.amount = data[$"products[{i}][amount]"];
+                product.price = data[$"products[{i}][price]"];
+                products.Add(product);
+            }
+
+            var import = new Import
+            {
+                product_price = 0,
+                created_at = DateTime.Now
+            };
+            db.Imports.Add(import);
+            db.SaveChanges();
+
+            var sync = new Dictionary<int, ImportProduct>();
+            double total = 0;
+            foreach (dynamic product in products)
+            {
+                int productId = int.Parse(product.product_id);
+                double price = double.Parse(product.price);
+                int amount = int.Parse(product.amount);
+                total += price * amount;
+
+                sync[productId] = new ImportProduct
+                {
+                    price = price,
+                    amount = amount,
+                    import_id = import.id,
+                    product_id = productId
+                };
+            }
+
+            foreach (var item in sync)
+            {
+                db.ImportProducts.Add(item.Value);
+            }
+            db.SaveChanges();
+
+            import.product_price = total;
+            db.SaveChanges();
+
+            TempData["success"] = "Import products successfully";
+
+            return RedirectToAction("Index", "Import");
+
+        }
 
         private object getImportDetail(int? import_id, bool isJson = false)
         {

@@ -14,7 +14,7 @@
             <h4 class="card-title">Product</h4>
         </div>
         <div class="card-body">
-            <form action="@Url.Action("ProcessImport", "Product")" method="post" class="invoice-repeater">
+            <form action="@Url.Action("Store", "Import")" method="post" class="invoice-repeater">
                 <div data-repeater-list="products">
                     <div data-repeater-item>
                         <div class="row d-flex align-items-end">
@@ -70,7 +70,7 @@
                         <button class="btn btn-icon btn-success p-1">
                             <span>Import</span>
                         </button>
-                        <a href="@Url.Action("Index", "Product")" class="btn btn-icon btn-secondary p-1">Cancel</a>
+                        <a href="@Url.Action("Index", "Import")" class="btn btn-icon btn-secondary p-1">Cancel</a>
                     </div>
 
                 </div>
