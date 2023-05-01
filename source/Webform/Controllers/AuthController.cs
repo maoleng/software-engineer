@@ -51,5 +51,16 @@ namespace Webform.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        [Route("/logout")]
+        public ActionResult Logout()
+        {
+            Session["authed"] = null;
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
     }
 }
