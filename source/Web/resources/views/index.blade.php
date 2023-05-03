@@ -84,7 +84,7 @@
 
                         <!-- Clear Filters Starts -->
                         <div id="clear-filters">
-                            <button type="button" class="btn w-100 btn-primary">Clear All Filters</button>
+                            <a href="{{ route('index') }}" type="button" class="btn w-100 btn-primary">Clear All Filters</a>
                         </div>
                         <!-- Clear Filters Ends -->
                     </div>
