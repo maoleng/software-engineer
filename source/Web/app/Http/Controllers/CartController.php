@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -43,14 +44,42 @@ class CartController extends Controller
         session()->put("cart.{$data['product_id']}", $amount);
     }
 
-    public function updateAddress(Request $request): void
+    public function updateAddress(Request $request)
     {
         $data = $request->all();
-        session()->put('info.name', $data['name']);
-        session()->put('info.phone', $data['phone']);
-        session()->put('info.email', $data['email']);
-        session()->put('info.district', $data['district']);
-        session()->put('info.province', $data['province']);
+        session()->put('info', [
+            'name' => $data['name'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'district' => $data['district'],
+            'province' => $data['province'],
+        ]);
+
+        $summarize = $this->getCartSummarize();
+        $headers = [
+            'Token' => env('GHTK_TOKEN'),
+            'Content-Type' => 'application/json'
+        ];
+        $body = [
+            "pick_province" => 'Hồ Chí Minh',
+            "pick_district" => "Quận 7",
+            "province" => $data['province'],
+            "district" => $data['district'],
+            "weight" => $summarize['count'] * 200,
+            "value" => $summarize['total'],
+            "transport" => "fly",
+            "deliver_option" => "none",
+            "tags" => [1, 7],
+        ];
+        $client = new Client();
+        $response = $client->get('https://services.giaohangtietkiem.vn/services/shipment/fee', [
+            'headers' => $headers,
+            'json' => $body,
+        ])->getBody()->getContents();
+        $ship = json_decode($response)->fee->ship_fee_only;
+        session()->put('order.fee.ship', $ship);
+
+        return $ship;
     }
 
     public function removeProduct(Request $request): void
@@ -76,6 +105,7 @@ class CartController extends Controller
             'products' => $result,
             'price_products' => $cart_summarize['price_products'],
             'price_discount' => $cart_summarize['price_discount'],
+            'price_ship' => $cart_summarize['price_ship'],
             'total' => $cart_summarize['total'],
         ]);
     }
@@ -86,18 +116,23 @@ class CartController extends Controller
         $products = Product::query()->whereIn('id', array_keys($cart))->with('discounts')->get();
         $price_products = 0;
         $price_discount = 0;
+        $count = 0;
         foreach ($cart as $product_id => $amount) {
             $product = $products->where('id', $product_id)->first();
             $sum = $amount * $product->price;
             $price_products += $sum;
             $price_discount += $product->discounts->where('need_amount', '<=', $amount)->sortByDesc('need_amount')
                 ->first()->percent * $sum / 100;
+            $count += $amount;
         }
+        $price_ship = session()->get('order.fee.ship') ?? 0;
 
         return [
             'price_products' => $price_products,
             'price_discount' => $price_discount,
-            'total' => $price_products - $price_discount,
+            'price_ship' => $price_ship,
+            'total' => $price_products - $price_discount + $price_ship,
+            'count' => $count,
         ];
     }
 

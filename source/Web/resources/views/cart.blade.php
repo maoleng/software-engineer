@@ -138,10 +138,6 @@
                                         <div class="detail-title">Discount</div>
                                         <div id="div-price_discount" class="detail-amt">{{ prettyPrice($price_discount) }}</div>
                                     </li>
-                                    <li class="price-detail">
-                                        <div class="detail-title">Ship</div>
-                                        <div class="detail-amt discount-amt text-success">Miễn phí</div>
-                                    </li>
                                 </ul>
                                 <hr />
                                 <ul class="list-unstyled">
@@ -170,34 +166,35 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            @php ($info = session()->get('info'))
                             <div class="col-md-12 col-sm-12">
                                 <div class="mb-2">
                                     <label class="form-label" cfor="checkout-name">Name:</label>
-                                    <input id="i-name" type="text" id="checkout-name" class="form-control" name="fname" placeholder="{{ env('OWNER_NAME') }}" />
+                                    <input id="i-name" value="{{ $info['name'] ?? null }}" type="text" class="form-control" name="fname" placeholder="{{ env('OWNER_NAME') }}" />
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-2">
                                     <label class="form-label" cfor="checkout-number">Phone:</label>
-                                    <input id="i-phone" type="text" id="checkout-number" class="form-control" name="mnumber" placeholder="0123456789" />
+                                    <input id="i-phone" value="{{ $info['phone'] ?? null }}" type="text" class="form-control" name="mnumber" placeholder="0123456789" />
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-2">
                                     <label class="form-label" cfor="checkout-number">Email:</label>
-                                    <input id="i-email" type="email" id="checkout-number" class="form-control" name="mnumber" placeholder="abc@example.com" />
+                                    <input id="i-email" value="{{ $info['email'] ?? null }}" type="email" class="form-control" name="mnumber" placeholder="abc@example.com" />
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-2">
                                     <label class="form-label" cfor="checkout-apt-number">Address detail:</label>
-                                    <input id="i-address1" type="text" id="checkout-apt-number" class="form-control" name="apt-number" placeholder="123 CMT8" />
+                                    <input id="i-address1" value="{{ $info['district'] ?? null }}" type="text" class="form-control" name="apt-number" placeholder="123 CMT8" />
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-2">
                                     <label class="form-label" cfor="checkout-landmark">City:</label>
-                                    <input id="i-address2" type="text" id="checkout-landmark" class="form-control" name="landmark" placeholder="Hồ Chí Minh" />
+                                    <input id="i-address2" value="{{ $info['province'] ?? null }}" type="text" class="form-control" name="landmark" placeholder="Hồ Chí Minh" />
                                 </div>
                             </div>
                             <div class="col-12">
@@ -266,7 +263,9 @@
                                 </li>
                                 <li class="price-detail">
                                     <div class="details-title">Ship</div>
-                                    <div class="detail-amt discount-amt text-success">Miễn phí</div>
+                                    <div class="detail-amt">
+                                        <strong id="s-ship">{{ prettyPrice($price_ship) }}</strong>
+                                    </div>
                                 </li>
                             </ul>
                             <hr />
@@ -335,6 +334,8 @@
                         district: $('#i-address1').val(),
                         province: $('#i-address2').val(),
                     }
+                }).done(function (data) {
+                    $('#s-ship').html(prettyMoney(data))
                 })
             })
 
