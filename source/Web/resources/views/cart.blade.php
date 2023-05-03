@@ -165,37 +165,43 @@
                 <!-- Checkout Customer Address Left starts -->
                 <div class="card">
                     <div class="card-header flex-column align-items-start">
-                        <h4 class="card-title">Địa chỉ nhận hàng</h4>
-                        <p class="card-text text-muted mt-25">Hãy đảm bảo rằng địa chỉ của bạn chính xác</p>
+                        <h4 class="card-title">Receiver address</h4>
+                        <p class="card-text text-muted mt-25">Ensure that your address is correct</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6 col-sm-12">
+                            <div class="col-md-12 col-sm-12">
                                 <div class="mb-2">
-                                    <label class="form-label" cfor="checkout-name">Họ và tên:</label>
+                                    <label class="form-label" cfor="checkout-name">Name:</label>
                                     <input id="i-name" type="text" id="checkout-name" class="form-control" name="fname" placeholder="{{ env('OWNER_NAME') }}" />
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-2">
-                                    <label class="form-label" cfor="checkout-number">Số điện thoại:</label>
+                                    <label class="form-label" cfor="checkout-number">Phone:</label>
                                     <input id="i-phone" type="text" id="checkout-number" class="form-control" name="mnumber" placeholder="0123456789" />
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-2">
-                                    <label class="form-label" cfor="checkout-apt-number">Số nhà, tên đường:</label>
+                                    <label class="form-label" cfor="checkout-number">Email:</label>
+                                    <input id="i-email" type="email" id="checkout-number" class="form-control" name="mnumber" placeholder="abc@example.com" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-2">
+                                    <label class="form-label" cfor="checkout-apt-number">Address detail:</label>
                                     <input id="i-address1" type="text" id="checkout-apt-number" class="form-control" name="apt-number" placeholder="123 CMT8" />
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-2">
-                                    <label class="form-label" cfor="checkout-landmark">Thành phố/Tỉnh:</label>
+                                    <label class="form-label" cfor="checkout-landmark">City:</label>
                                     <input id="i-address2" type="text" id="checkout-landmark" class="form-control" name="landmark" placeholder="Hồ Chí Minh" />
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button type="button" class="btn btn-primary btn-next delivery-address">Tiếp tục</button>
+                                <button id="btn-address" type="button" class="btn btn-primary btn-next delivery-address">Continue</button>
                             </div>
                         </div>
                     </div>
@@ -312,13 +318,25 @@
                         product_id: product_id,
                         amount: amount,
                     }
-                }).done(function(e) {
-                    console.log(e)
+                }).done(function() {
                     updateCartSummarize()
                 })
-
             })
 
+            $('#btn-address').on('click', function () {
+                $.ajax({
+                    url: '{{ route('cart.update_address') }}',
+                    type: 'PUT',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        name: $('#i-name').val(),
+                        phone: $('#i-phone').val(),
+                        email: $('#i-email').val(),
+                        district: $('#i-address1').val(),
+                        province: $('#i-address2').val(),
+                    }
+                })
+            })
 
             $('#btn-pay').on('click', function() {
                 let payment_method = $('input[name=paymentOptions]:checked', '#form-checkout').val()

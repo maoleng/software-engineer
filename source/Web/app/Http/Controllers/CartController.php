@@ -43,6 +43,16 @@ class CartController extends Controller
         session()->put("cart.{$data['product_id']}", $amount);
     }
 
+    public function updateAddress(Request $request): void
+    {
+        $data = $request->all();
+        session()->put('info.name', $data['name']);
+        session()->put('info.phone', $data['phone']);
+        session()->put('info.email', $data['email']);
+        session()->put('info.district', $data['district']);
+        session()->put('info.province', $data['province']);
+    }
+
     public function removeProduct(Request $request): void
     {
         session()->remove("cart.{$request->get('product_id')}");

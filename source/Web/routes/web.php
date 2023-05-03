@@ -27,6 +27,7 @@ Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
     Route::get('/summarize', [CartController::class, 'getCartSummarize'])->name('summarize');
     Route::put('/', [CartController::class, 'update'])->name('update');
     Route::put('/update_amount', [CartController::class, 'updateAmount'])->name('update_amount');
+    Route::put('/update_address', [CartController::class, 'updateAddress'])->name('update_address');
     Route::delete('/', [CartController::class, 'removeProduct'])->name('remove_product');
 });
 
