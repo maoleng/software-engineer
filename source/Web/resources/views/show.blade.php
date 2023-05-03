@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-12 col-md-7">
                         <h4>{{ $product->name }}</h4>
-                        <span class="card-text item-company">Bởi <a href="#" class="company-name">{{ $product->company_name }}</a></span>
+                        <span class="card-text item-company">By <a href="{{ route('index', ['category' => $product->categoryName]) }}" class="company-name">{{ $product->categoryName }}</a></span>
                         <div class="ecommerce-details-price d-flex flex-wrap mt-1">
                             <h4 class="item-price me-1">{{ prettyPrice($product->price) }}</h4>
                             <ul class="unstyled-list list-inline ps-1 border-start">
@@ -46,7 +46,7 @@
                         </ul>
                         <hr />
                         <div class="d-flex flex-column flex-sm-row pt-1">
-                            <a href="#" class="btn-add_to_cart btn btn-primary btn-cart me-0 me-sm-1 mb-1 mb-sm-0">
+                            <a href="#" data-id="{{ $product->id }}" class="btn-add_to_cart btn btn-primary btn-cart me-0 me-sm-1 mb-1 mb-sm-0">
                                 <i data-feather="shopping-cart" class="me-50"></i>
                                 <span class="add-to-cart">Add to cart</span>
                             </a>

@@ -188,7 +188,7 @@
                                 <h4 class="item-price">{{ prettyPrice($product->price) }}</h4>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary btn-cart">
+                        <a href="#" data-id="{{ $product->id }}" class="btn-add_to_cart btn btn-primary btn-cart">
                             <i data-feather="shopping-cart"></i>
                             <span class="add-to-cart">Add to cart</span>
                         </a>
@@ -246,15 +246,12 @@
             $('.btn-add_to_cart').on('click', function () {
                 $.ajax({
                     url: '{{ route('cart.update') }}',
-                    type: 'POST',
+                    type: 'PUT',
                     data: {
                         _token: '{{ csrf_token() }}',
                         product_id: $(this).data('id'),
                     }
-                }).done(function(e) {
-                    window.location.href = e
-                    console.log(e)
-                });
+                })
             })
 
             function handle(param_name, value)

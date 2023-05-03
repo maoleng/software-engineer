@@ -6,6 +6,7 @@ use App\Enums\ProductCategory;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -44,7 +45,7 @@ class HomeController extends Controller
             });
         }
         if ($category !== null) {
-            $builder->where('category', array_search($category, ProductCategory::getDescriptions(), true));
+            $builder->where('category', array_search(Str::title($category), ProductCategory::getDescriptions(), false));
         }
         if (in_array($sort, ['acs', 'desc'])) {
             $builder->orderBy('price', $sort);

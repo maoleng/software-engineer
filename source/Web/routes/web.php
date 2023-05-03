@@ -23,6 +23,11 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
 Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
     Route::put('/', [CartController::class, 'update'])->name('update');
+    Route::delete('/', [CartController::class, 'removeProduct'])->name('remove_product');
 });
 
 
+
+Route::get('/test', function () {
+    echo json_encode(session()->all());
+});
