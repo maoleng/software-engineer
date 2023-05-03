@@ -27,11 +27,12 @@
   // Min - Max
 
   var touchspinValue = $('.touchspin-min-max'),
-    counterMin = 17,
-    counterMax = 21;
+    counterMin = 1,
+    counterMax = 500;
   if (touchspinValue.length > 0) {
     touchspinValue
       .TouchSpin({
+        step: 1,
         min: counterMin,
         max: counterMax,
         buttondown_txt: feather.icons['minus'].toSvg(),
@@ -55,7 +56,7 @@
 
   // Step
   $('.touchspin-step').TouchSpin({
-    step: 5,
+    step: 1,
     buttondown_txt: feather.icons['minus'].toSvg(),
     buttonup_txt: feather.icons['plus'].toSvg()
   });
