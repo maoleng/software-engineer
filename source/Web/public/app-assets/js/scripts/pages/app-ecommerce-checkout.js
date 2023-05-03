@@ -22,7 +22,7 @@ $(function () {
   // remove items from wishlist page
   removeItem.on('click', function () {
     $(this).closest('.ecommerce-card').remove();
-    toastr['error']('', 'Xóa thành công 🗑️', {
+    toastr['error']('', 'Removed Item 🗑️', {
       closeButton: true,
       tapToDismiss: false,
       rtl: isRtl

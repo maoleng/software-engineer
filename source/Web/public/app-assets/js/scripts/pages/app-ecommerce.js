@@ -31,11 +31,11 @@ $(function () {
     sortingDropdown = $('.dropdown-sort .dropdown-item'),
     sortingText = $('.dropdown-toggle .active-sorting'),
     wishlist = $('.btn-wishlist'),
-    checkout = 'cart';
+    checkout = 'app-ecommerce-checkout.html';
 
   if ($('body').attr('data-framework') === 'laravel') {
     var url = $('body').attr('data-asset-path');
-    checkout = url + 'cart';
+    checkout = url + 'app/ecommerce/checkout';
   }
 
   // On sorting dropdown change
@@ -108,9 +108,9 @@ $(function () {
       if (addToCart.length > 0) {
         e.preventDefault();
       }
-      addToCart.text('Xem giỏ hàng').removeClass('add-to-cart').addClass('view-in-cart');
+      addToCart.text('View In Cart').removeClass('add-to-cart').addClass('view-in-cart');
       $this.attr('href', checkout);
-      toastr['success']('', 'Đã thêm vào giỏ hàng 🛒', {
+      toastr['success']('', 'Added Item In Your Cart 🛒', {
         closeButton: true,
         tapToDismiss: false,
         rtl: isRTL

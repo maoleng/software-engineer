@@ -13,12 +13,12 @@ $(function () {
     productOption = $('.product-color-options li'),
     btnCart = $('.btn-cart'),
     wishlist = $('.btn-wishlist'),
-    checkout = 'cart',
+    checkout = 'app-ecommerce-checkout.html',
     isRtl = $('html').attr('data-textdirection') === 'rtl';
 
   if ($('body').attr('data-framework') === 'laravel') {
     var url = $('body').attr('data-asset-path');
-    checkout = url + 'cart';
+    checkout = url + 'app/ecommerce/checkout';
   }
 
   // Init Swiper
@@ -58,9 +58,9 @@ $(function () {
         addToCart = $this.find('.add-to-cart');
       if (addToCart.length > 0) {
         e.preventDefault();
-        addToCart.text('Xem giỏ hàng').removeClass('add-to-cart').addClass('view-in-cart');
+        addToCart.text('View In Cart').removeClass('add-to-cart').addClass('view-in-cart');
         $this.attr('href', checkout);
-        toastr['success']('', 'Đã thêm vào giỏ hàng 🛒', {
+        toastr['success']('', 'Added Item In Your Cart 🛒', {
           closeButton: true,
           tapToDismiss: false,
           rtl: isRtl
