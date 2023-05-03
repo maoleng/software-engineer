@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ProductCategory;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -16,8 +17,6 @@ class HomeController extends Controller
         $sort = $query['sort'] ?? null;
         $price = $query['price'] ?? null;
         $category = $query['category'] ?? null;
-
-
 
         $builder = Product::query();
         if ($q !== null) {
@@ -51,7 +50,14 @@ class HomeController extends Controller
             $builder->orderBy('price', $sort);
         }
         $products = $builder->paginate(9);
-        $categories = ProductCategory::getDescriptions();
+
+        $categories = Product::query()->select(DB::raw('category, count(*) as count'))
+            ->groupBy('category')->get()->map(function ($category) {
+                return [
+                    'name' => ProductCategory::getDescription($category->category),
+                    'count' => $category->count,
+                ];
+            })->toArray();
 
         return view('index', [
             'products' => $products,

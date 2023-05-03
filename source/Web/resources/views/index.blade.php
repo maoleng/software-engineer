@@ -71,11 +71,11 @@
                             <ul class="list-unstyled brand-list">
                                 @foreach ($categories as $category)
                                     <li>
-                                        <div data-value="{{ $category }}" class="btn-category form-check">
-                                            <input id="category_{{ $category }}" {{ request()->get('category') === $category ? 'checked' : '' }} type="radio" class="form-check-input"/>
-                                            <label class="form-check-label" for="productBrand1">{{ $category }}</label>
+                                        <div data-value="{{ $category['name'] }}" class="btn-category form-check">
+                                            <input id="category_{{ $category['name'] }}" {{ request()->get('category') === $category['name'] ? 'checked' : '' }} type="radio" class="form-check-input"/>
+                                            <label class="form-check-label" for="productBrand1">{{ $category['name'] }}</label>
                                         </div>
-                                        <span>746</span>
+                                        <span>{{ $category['count'] }}</span>
                                     </li>
                                 @endforeach
                             </ul>
