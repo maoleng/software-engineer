@@ -18,7 +18,7 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.', 'middleware' => [IfAlreadyLog
 Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
-    Route::get('/', [ProductController::class, 'show'])->name('show');
+    Route::get('/{name}', [ProductController::class, 'show'])->name('show');
 });
 Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
     Route::get('/', [CartController::class, 'index'])->name('index');

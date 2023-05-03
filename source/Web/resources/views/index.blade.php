@@ -161,7 +161,7 @@
                 @foreach ($products as $product)
                     <div class="card ecommerce-card">
                     <div class="item-img text-center">
-                        <a href="{{ route('product.show', ['product' => $product]) }}">
+                        <a href="{{ route('product.show', ['name' => $product->slugName]) }}">
                             <img class="img-fluid card-img-top" src="{{ $product->image }}" alt="img-placeholder" />
                         </a>
                     </div>
@@ -175,7 +175,7 @@
                             </div>
                         </div>
                         <h6 class="item-name">
-                            <a class="text-body" href="{{ route('product.show', ['product' => $product]) }}">{{ $product->name }}</a>
+                            <a class="text-body" href="{{ route('product.show', ['name' => $product->slugName]) }}">{{ $product->name }}</a>
                             <span class="card-text item-company">By <a href="#" class="company-name"></a></span>
                         </h6>
                         <p class="card-text item-description">
