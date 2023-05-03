@@ -10,11 +10,11 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper container-xxl p-0">
-        <div class="content-detached content-right">
-            <div class="content-body">
+{{--        <div class="content-detached content-right">--}}
+{{--            <div class="content-body">--}}
                 @yield('content')
-            </div>
-        </div>
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 </div>
 @include('theme.footer')

@@ -36,8 +36,8 @@
         <div class="navbar-container main-menu-content" data-menu="menu-container">
             <!-- include includes/mixins-->
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="dropdown nav-item sidebar-group-active active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="{{ route('index') }}" data-i18n="File Manager"><i data-feather="home"></i><span data-i18n="Dashboard">Trang chủ</span></a></li>
-                <li class="dropdown nav-item sidebar-group-active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="{{ env('OWNER_URL') }}" target="_blank" data-i18n="File Manager"><i data-feather="link"></i><span data-i18n="File Manager">Về chúng tôi</span></a></li>
+                <li class="dropdown nav-item sidebar-group-active active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="{{ route('index') }}" data-i18n="File Manager"><i data-feather="home"></i><span data-i18n="Dashboard">Home</span></a></li>
+{{--                <li class="dropdown nav-item sidebar-group-active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="{{ env('OWNER_URL') }}" target="_blank" data-i18n="File Manager"><i data-feather="link"></i><span data-i18n="File Manager"></span></a></li>--}}
             </ul>
         </div>
     </div>
