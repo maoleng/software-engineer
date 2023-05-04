@@ -252,19 +252,19 @@
                                 <li class="price-detail">
                                     <div class="details-title">Sub total</div>
                                     <div class="detail-amt">
-                                        <strong>{{ prettyPrice($price_products) }}</strong>
+                                        <strong id="s-price_products">{{ prettyPrice($price_products) }}</strong>
                                     </div>
                                 </li>
                                 <li class="price-detail">
                                     <div class="details-title">Discount</div>
                                     <div class="detail-amt">
-                                        <strong>{{ prettyPrice($price_discount) }}</strong>
+                                        <strong id="s-price_discount">{{ prettyPrice($price_discount) }}</strong>
                                     </div>
                                 </li>
                                 <li class="price-detail">
                                     <div class="details-title">Ship</div>
                                     <div class="detail-amt">
-                                        <strong id="s-ship">{{ prettyPrice($price_ship) }}</strong>
+                                        <strong id="s-price_ship">{{ prettyPrice($price_ship) }}</strong>
                                     </div>
                                 </li>
                             </ul>
@@ -272,7 +272,7 @@
                             <ul class="list-unstyled price-details">
                                 <li class="price-detail">
                                     <div class="details-title">Total</div>
-                                    <div class="detail-amt fw-bolder">{{ prettyPrice($total) }}</div>
+                                    <div id="div1-total" class="detail-amt fw-bolder">{{ prettyPrice($total) }}</div>
                                 </li>
                             </ul>
                         </div>
@@ -337,7 +337,7 @@
                         province: $('#i-address2').val(),
                     }
                 }).done(function (data) {
-                    $('#s-ship').html(data)
+                    $('#s-price_ship').html(data)
                 })
             })
 
@@ -380,9 +380,15 @@
                 $.ajax({
                     url: '{{ route('cart.summarize') }}'
                 }).done(function (data) {
-                    $('#div-price_products').text(prettyMoney(data.price_products))
-                    $('#div-price_discount').text(prettyMoney(data.price_discount))
-                    $('#div-total').text(prettyMoney(data.total))
+                    const price_products = prettyMoney(data.price_products)
+                    const price_discount = prettyMoney(data.price_discount)
+                    const total = prettyMoney(data.total)
+                    $('#div-price_products').text(price_products)
+                    $('#div-price_discount').text(price_discount)
+                    $('#s-price_products').html(price_products)
+                    $('#s-price_discount').html(price_discount)
+                    $('#div-total').text(total)
+                    $('#div1-total').text(total)
                 })
             }
 
