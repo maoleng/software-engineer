@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\IfAlreadyLogin;
@@ -20,6 +21,12 @@ Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout
 
 Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
     Route::get('/{name}', [ProductController::class, 'show'])->name('show');
+});
+
+Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
+    Route::get('/', [OrderController::class, 'index'])->name('index');
+    Route::get('/show', [OrderController::class, 'show'])->name('show');
+    Route::get('/print', [OrderController::class, 'print'])->name('print');
 });
 
 Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {

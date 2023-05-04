@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\App;
 use App\Lib\JWT\JWT;
+use Illuminate\Support\Facades\Route;
 
 if (!function_exists('c')) {
     function c(string $key)
@@ -69,5 +70,12 @@ if (!function_exists('successAlert')) {
                 }
             })
         ";
+    }
+}
+
+if (!function_exists('toggleActive')) {
+    function toggleActive($route): string
+    {
+        return Route::currentRouteName() === $route ? 'active' : '';
     }
 }
