@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatus;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PayController extends Controller
@@ -17,15 +20,15 @@ class PayController extends Controller
         $price_discounts = 0;
         $data = [];
         foreach ($cart as $product_id => $amount) {
+            $amount = (int) $amount;
             $product = $products->where('id', $product_id)->first();
             $percent_discount = $product->discounts->where('need_amount', '<=', $amount)->sortByDesc('need_amount')
                 ->first()->percent ?? 0;
             $price_discount = $product->price * $percent_discount / 100;
-            $price_discounts += $price_products * $amount;
+            $price_discounts += $price_discount * $amount;
             $sum = $amount * $product->price;
             $price_products += $sum;
-            $data[] = [
-                'product_id' => $product->id,
+            $data[$product->id] = [
                 'name' => $product->name,
                 'amount' => $amount,
                 'price' => $product->price,
@@ -35,6 +38,8 @@ class PayController extends Controller
         }
         session()->put('order.fee.product_price', $price_products - $price_discounts);
         session()->put('order.products', $data);
+        session()->put('order.info', session()->pull('info'));
+        session()->remove('cart');
 
         $price_ship = session()->get('order.fee.ship') ?? 0;
         $total = $price_products - $price_discounts + $price_ship;
@@ -43,7 +48,7 @@ class PayController extends Controller
     }
 
 
-    public function ipn(Request $request)
+    public function ipn(Request $request): RedirectResponse
     {
         $data = $request->all();
         $inputData = [];
@@ -69,10 +74,30 @@ class PayController extends Controller
         if ($secureHash !== $vnp_SecureHash) {
             abort(403);
         }
-        $data = $request->all();
-        if (! isset($data['vnp_TxnRef'], $data['vnp_BankCode'])) {
+        $ipn_data = $request->all();
+        if (! isset($ipn_data['vnp_TxnRef'], $ipn_data['vnp_BankCode'])) {
             abort(403);
         }
+
+        $data = session()->get('order');
+        $order = Order::query()->create([
+            'name' => $data['info']['name'],
+            'address' => $data['info']['district'].' - '.$data['info']['province'],
+            'email' => $data['info']['email'],
+            'phone' => $data['info']['phone'],
+            'status' => OrderStatus::SUCCESSFUL,
+            'is_paid' => true,
+            'product_price' => $data['fee']['product_price'],
+            'ship_price' => $data['fee']['ship'],
+            'user_id' => authed()->id ?? null,
+            'bank_code' => $ipn_data['vnp_BankCode'],
+            'transaction_code' => $ipn_data['vnp_BankTranNo'],
+            'created_at' => now(),
+        ]);
+        $order->orderProducts()->sync($data['products']);
+        session()->remove('order');
+
+        return redirect()->route('index')->with('success', 'Payment successfully');
     }
 
     public function createPaymentUrl($total, $return_url, $bank_code): string

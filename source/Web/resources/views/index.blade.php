@@ -4,6 +4,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/nouislider.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/toastr.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/animate/animate.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
 @endsection
 
 @section('page_css')
@@ -11,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/extensions/ext-component-sliders.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-ecommerce.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/extensions/ext-component-sweet-alerts.css') }}">
 @endsection
 
 @section('content')
@@ -219,12 +222,16 @@
     <script src={{ asset('app-assets/vendors/js/extensions/wNumb.min.js') }}></script>
     <script src={{ asset('app-assets/vendors/js/extensions/nouislider.min.js') }}></script>
     <script src={{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/polyfill.min.js') }}"></script>
 
 @endsection
 
 @section('script')
     <script src={{ asset('app-assets/js/scripts/pages/app-ecommerce.js') }}></script>
+    <script src="{{ asset('app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') }}"></script>
     <script>
+        {!! successAlert() !!}
         $(document).ready(function() {
             $('#i-search').on('keypress',function(e) {
                 if(e.which === 13) {

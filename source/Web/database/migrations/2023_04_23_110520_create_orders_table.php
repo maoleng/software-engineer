@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->integer('status');
             $table->boolean('is_paid')->default(0);
-            $table->double('ship_fee')->default(0);
             $table->double('product_price');
             $table->double('ship_price')->default(0);
             $table->foreignId('user_id')->nullable()->constrained('User');
