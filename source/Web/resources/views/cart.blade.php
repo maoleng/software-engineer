@@ -88,7 +88,7 @@
                             <div class="item-quantity">
                                 <span class="quantity-title">Amount:</span>
                                 <div data-id="{{ $product['information']->id }}" data-price="{{ $product['information']->price }}" class="quantity-counter-wrapper">
-                                    @if (authed()->is_agent)
+                                    @if (authed()->is_agent ?? null)
                                         <div class="input-group input-group-lg">
                                             <input id="i-quantity-{{ $product['information']->id }}" type="number" class="i-quantity touchspin-min-max" data-price="{{ $product['information']->price }}" value="{{ $product['amount'] }}" />
                                         </div>
@@ -104,7 +104,7 @@
                             <div class="item-wrapper">
                                 <div class="item-cost">
                                     <h4 id="h4-price-{{ $product['information']->id }}" class="item-price">{{ prettyPrice($product['sum_price']) }}</h4>
-                                    @if (authed()->is_agent)
+                                    @if (authed()->is_agent ?? null)
                                         <p class="card-text shipping">
                                             @foreach ($product['information']->discounts as $discount)
                                                 <span class="">Buy <b>{{ $discount->need_amount }} </b> reduce <b> {{ $discount->percent }}%</b></span><br>
@@ -299,7 +299,7 @@
     <script>
         $(document).ready(function() {
             $('.i-quantity').on('keyup', function () {
-                const max = {{ authed()->is_agent ? 500 : 10 }};
+                const max = {{ (authed()->is_agent ?? null) ? 500 : 10 }};
                 let amount = $(this).val()
                 if (amount < 1) {
                     amount = 1
