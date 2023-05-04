@@ -32,7 +32,8 @@ Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
 });
 
 Route::group(['prefix' => 'payment', 'as' => 'payment.'], function () {
-    Route::get('/', [PayController::class, 'pay'])->name('pay');
+    Route::post('/', [PayController::class, 'pay'])->name('pay');
+    Route::get('/', [PayController::class, 'ipn'])->name('ipn');
 });
 
 Route::get('/test', function () {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ProductCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
@@ -36,5 +37,17 @@ class Product extends Model
         return $this->hasMany(Discount::class);
     }
 
+    public function importProducts(): BelongsToMany
+    {
+        return $this->belongsToMany(Import::class, 'ImportProduct', 'product_id', 'import_id')
+            ->withPivot([
+                'amount', 'price',
+            ]);
+    }
+
+    public function getOriginalPriceAttribute(): float
+    {
+        return (double) $this->importProducts()->orderByDesc('created_at')->first()->pivot->price;
+    }
 
 }

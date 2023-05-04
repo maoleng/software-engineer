@@ -12,8 +12,9 @@
     </div>
     <div class="navbar-container d-flex content">
         <ul class="nav navbar-nav align-items-center ms-auto">
-            <li class="nav-item dropdown dropdown-cart me-25"><a class="" href="{{ route('cart.index') }}"><i class="ficon" data-feather="shopping-cart"></i></a></li>
-
+            @if (authed() !== null)
+                <li class="nav-item dropdown dropdown-cart me-25"><a class="" href="{{ route('cart.index') }}"><i class="ficon" data-feather="shopping-cart"></i></a></li>
+            @endif
             <li class="nav-item dropdown dropdown-user">
                 @if (authed() === null)
                     <a class="nav-link" href="{{ route('auth.login') }}">

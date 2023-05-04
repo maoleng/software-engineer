@@ -44,7 +44,7 @@ class CartController extends Controller
         session()->put("cart.{$data['product_id']}", $amount);
     }
 
-    public function updateAddress(Request $request)
+    public function updateAddress(Request $request): string
     {
         $data = $request->all();
         session()->put('info', [
@@ -79,7 +79,7 @@ class CartController extends Controller
         $ship = json_decode($response)->fee->ship_fee_only;
         session()->put('order.fee.ship', $ship);
 
-        return $ship;
+        return prettyPrice($ship);
     }
 
     public function removeProduct(Request $request): void
@@ -121,8 +121,8 @@ class CartController extends Controller
             $product = $products->where('id', $product_id)->first();
             $sum = $amount * $product->price;
             $price_products += $sum;
-            $price_discount += $product->discounts->where('need_amount', '<=', $amount)->sortByDesc('need_amount')
-                ->first()->percent * $sum / 100;
+            $price_discount += ($product->discounts->where('need_amount', '<=', $amount)->sortByDesc('need_amount')
+                ->first()->percent ?? 0) * $sum / 100;
             $count += $amount;
         }
         $price_ship = session()->get('order.fee.ship') ?? 0;

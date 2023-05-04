@@ -146,7 +146,7 @@
                                         <div id="div-total" class="detail-amt fw-bolder">{{ prettyPrice($total) }}</div>
                                     </li>
                                 </ul>
-                                <button type="button" class="btn btn-primary w-100 btn-next place-order">Continue</button>
+                                <button @if ($total === 0) disabled @endif type="button" class="btn btn-primary w-100 btn-next place-order">Continue</button>
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button id="btn-address" type="button" class="btn btn-primary btn-next delivery-address">Continue</button>
+                                <button @if ($total === 0) disabled @endif id="btn-address" type="button" class="btn btn-primary btn-next delivery-address">Continue</button>
                             </div>
                         </div>
                     </div>
@@ -220,24 +220,24 @@
                                 <li class="py-50">
                                     <div class="form-check">
                                         <input value="VNPAYQR" type="radio" id="customColorRadio2" name="paymentOptions" class="form-check-input" />
-                                        <label class="form-check-label" for="customColorRadio2"> Cổng thanh toán VNPAYQR </label>
+                                        <label class="form-check-label" for="customColorRadio2"> VNPAYQR Payment Gateway </label>
                                     </div>
                                 </li>
                                 <li class="py-50">
                                     <div class="form-check">
                                         <input value="VNBANK" type="radio" id="customColorRadio3" name="paymentOptions" class="form-check-input" />
-                                        <label class="form-check-label" for="customColorRadio3"> Thanh toán qua thẻ ATM/Tài khoản nội địa </label>
+                                        <label class="form-check-label" for="customColorRadio3"> Payment via ATM card/Domestic account </label>
                                     </div>
                                 </li>
                                 <li class="py-50">
                                     <div class="form-check">
                                         <input value="INTCARD" type="radio" id="customColorRadio4" name="paymentOptions" class="form-check-input" />
-                                        <label class="form-check-label" for="customColorRadio4"> Thanh toán qua thẻ quốc tế </label>
+                                        <label class="form-check-label" for="customColorRadio4"> Payment via international card </label>
                                     </div>
                                 </li>
                             </ul>
                             <div class="col-12">
-                                <button id="btn-pay" type="button" class="btn btn-primary btn-next delivery-address">Continue</button>
+                                <button @if ($total === 0 || session()->get('info') === null) disabled @endif id="btn-pay" type="button" class="btn btn-primary btn-next delivery-address">Continue</button>
                             </div>
                         </div>
                     </div>
@@ -299,11 +299,12 @@
     <script>
         $(document).ready(function() {
             $('.i-quantity').on('keyup', function () {
+                const max = {{ authed()->is_agent ? 500 : 10 }};
                 let amount = $(this).val()
                 if (amount < 1) {
                     amount = 1
-                } else if (amount > 500) {
-                    amount = 500
+                } else if (amount > max) {
+                    amount = max
                 }
                 const price = $(this).data('price')
                 const product_id = $(this).attr('id').substring(11)
@@ -323,6 +324,7 @@
             })
 
             $('#btn-address').on('click', function () {
+                $('#btn-pay').removeAttr('disabled')
                 $.ajax({
                     url: '{{ route('cart.update_address') }}',
                     type: 'PUT',
@@ -335,7 +337,7 @@
                         province: $('#i-address2').val(),
                     }
                 }).done(function (data) {
-                    $('#s-ship').html(prettyMoney(data))
+                    $('#s-ship').html(data)
                 })
             })
 
@@ -348,14 +350,8 @@
                     data: {
                         _token: '{{ csrf_token() }}',
                         bank_code: payment_method,
-                        amount: '{{ $total }}',
-                        name: $('#i-name').val(),
-                        phone: $('#i-phone').val(),
-                        address1: $('#i-address1').val(),
-                        address2: $('#i-address2').val(),
                     }
                 }).done(function(url) {
-                    localStorage.setItem('show', '1');
                     window.location.href = url;
                 })
             })
