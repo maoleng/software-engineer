@@ -10,7 +10,8 @@ class ProductController extends Controller
 
     public function show($name): View
     {
-        $product = Product::query()->whereRaw("REPLACE(REPLACE(LOWER(name), ' ', '-'), '.', '') = '$name'")
+        $product = Product::query()
+            ->whereRaw("REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER(name), ' ', '-'), '.', ''), '/', ''), ')', ''), '(', '') = '$name'")
             ->with('discounts')
             ->firstOrFail();
         $products = Product::query()->where('category', $product->category)->limit(5)->get();

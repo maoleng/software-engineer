@@ -118,16 +118,16 @@
                                             @if ($sort_type === null)
                                                 All
                                             @elseif($sort_type === 'asc')
-                                                Highest
-                                            @elseif($sort_type === 'desc')
                                                 Lowest
+                                            @elseif($sort_type === 'desc')
+                                                Highest
                                             @endif
                                         </span>
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="btn-sort dropdown-item" href="/">All</a>
-                                        <a data-value="desc" class="btn-sort dropdown-item" href="#">Lowest</a>
-                                        <a data-value="asc" class="btn-sort dropdown-item" href="#">Highest</a>
+                                        <a data-value="desc" class="btn-sort dropdown-item" href="#">Highest</a>
+                                        <a data-value="asc" class="btn-sort dropdown-item" href="#">Lowest</a>
                                     </div>
                                 </div>
                                 <div class="btn-group" role="group">

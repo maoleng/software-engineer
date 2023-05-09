@@ -45,7 +45,7 @@ namespace Webform.Controllers
                     o.address.Contains(q) ||
                     o.email.Contains(q) ||
                     o.phone.Contains(q) ||
-                    o.ship_fee.ToString().Contains(q) ||
+                    o.ship_price.ToString().Contains(q) ||
                     o.product_price.ToString().Contains(q) ||
                     o.created_at.ToString().Contains(q)
                 );
