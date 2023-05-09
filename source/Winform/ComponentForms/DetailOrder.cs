@@ -109,7 +109,7 @@ namespace Winform.ComponentForms
             txtAddress.Text = order.address;
             txtProductPrice.Text = order.product_price.ToString();
             txtShipPrice.Text = order.ship_price.ToString();
-            txtTotal.Text = (order.product_price + order.ship_fee).ToString();
+            txtTotal.Text = (order.product_price + order.ship_price).ToString();
             txtCreatedAt.Text = order.created_at.ToString();
             txtTransactionCode.Text = order.transaction_code;
             txtBankCode.Text = order.bank_code;

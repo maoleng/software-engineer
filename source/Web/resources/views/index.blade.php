@@ -116,15 +116,16 @@
                                         <span class="active-sorting">
                                             @php ($sort_type = request()->get('sort'))
                                             @if ($sort_type === null)
-                                                Sort
+                                                All
                                             @elseif($sort_type === 'asc')
-                                                Lowest
-                                            @elseif($sort_type === 'desc')
                                                 Highest
+                                            @elseif($sort_type === 'desc')
+                                                Lowest
                                             @endif
                                         </span>
                                     </button>
                                     <div class="dropdown-menu">
+                                        <a class="btn-sort dropdown-item" href="/">All</a>
                                         <a data-value="desc" class="btn-sort dropdown-item" href="#">Lowest</a>
                                         <a data-value="asc" class="btn-sort dropdown-item" href="#">Highest</a>
                                     </div>
