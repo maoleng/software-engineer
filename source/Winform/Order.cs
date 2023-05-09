@@ -27,7 +27,6 @@ namespace Winform
         public string phone { get; set; }
         public int status { get; set; }
         public bool is_paid { get; set; }
-        public double ship_fee { get; set; }
         public double product_price { get; set; }
         public double ship_price { get; set; }
         public Nullable<long> user_id { get; set; }
