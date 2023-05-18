@@ -18,7 +18,10 @@ This reposiory is built base on
   - Contribute
 
 ## Demo
-[https://youtu.be/rDrFv5Zcxuc](https://youtu.be/rDrFv5Zcxuc)
+
+[View at youtube for higher quality](https://youtu.be/rDrFv5Zcxuc)
+
+https://github.com/maoleng/software-engineer/assets/91431461/0184633a-0fc2-47af-a8eb-78f3c655ead3
 
 ## How to run project
 - Webform (.NET Winform)
